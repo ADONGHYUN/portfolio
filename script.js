@@ -1,4 +1,14 @@
 const yearNode = document.getElementById("current-year");
+const currentSectionTitleNode = document.getElementById("current-section-title");
+const sectionTitles = {
+  top: "개발자 소개",
+  고운맘: "고운맘",
+  experience: "경력",
+  "data-model": "ERD",
+  "problem-solving": "문제 해결",
+  stack: "기술",
+  contact: "연락",
+};
 
 if (yearNode) {
   yearNode.textContent = String(new Date().getFullYear());
@@ -22,6 +32,10 @@ function setActiveSection(sectionId) {
     } else {
       link.removeAttribute("aria-current");
     }
+  }
+
+  if (currentSectionTitleNode) {
+    currentSectionTitleNode.textContent = sectionTitles[sectionId] ?? "개발자 소개";
   }
 }
 
@@ -49,4 +63,20 @@ if ("IntersectionObserver" in window && sections.length > 0) {
   for (const { target } of sections) {
     observer.observe(target);
   }
+}
+
+const additionalCaseToggle = document.getElementById("toggle-additional-cases");
+const additionalCases = Array.from(document.querySelectorAll('[data-case-tier="additional"]'));
+
+if (additionalCaseToggle && additionalCases.length > 0) {
+  additionalCaseToggle.addEventListener("click", () => {
+    const willExpand = additionalCaseToggle.getAttribute("aria-expanded") !== "true";
+
+    for (const caseStudy of additionalCases) {
+      caseStudy.hidden = !willExpand;
+    }
+
+    additionalCaseToggle.setAttribute("aria-expanded", String(willExpand));
+    additionalCaseToggle.textContent = willExpand ? "추가 문제 해결 사례 접기" : "추가 문제 해결 사례 2개 보기";
+  });
 }
