@@ -64,19 +64,3 @@ if ("IntersectionObserver" in window && sections.length > 0) {
     observer.observe(target);
   }
 }
-
-const additionalCaseToggle = document.getElementById("toggle-additional-cases");
-const additionalCases = Array.from(document.querySelectorAll('[data-case-tier="additional"]'));
-
-if (additionalCaseToggle && additionalCases.length > 0) {
-  additionalCaseToggle.addEventListener("click", () => {
-    const willExpand = additionalCaseToggle.getAttribute("aria-expanded") !== "true";
-
-    for (const caseStudy of additionalCases) {
-      caseStudy.hidden = !willExpand;
-    }
-
-    additionalCaseToggle.setAttribute("aria-expanded", String(willExpand));
-    additionalCaseToggle.textContent = willExpand ? "추가 문제 해결 사례 접기" : "추가 문제 해결 사례 2개 보기";
-  });
-}

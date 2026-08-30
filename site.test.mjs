@@ -48,7 +48,7 @@ const requiredHtml = [
   "데이터 흐름으로 설명하는 문제 해결",
   "결제 상태 수렴",
   "실시간 재고 동시성 제어",
-  "product_option_inventory",
+  "inventory_option_balance",
   "원자적 UPDATE",
   "낙관적 락",
   "비관적 락",
