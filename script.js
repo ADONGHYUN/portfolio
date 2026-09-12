@@ -3,6 +3,7 @@ const currentSectionTitleNode = document.getElementById("current-section-title")
 const sectionTitles = {
   top: "개발자 소개",
   고운맘: "고운맘",
+  "ai-orchestration": "AI 개발",
   experience: "경력",
   "data-model": "ERD",
   "problem-solving": "문제 해결",

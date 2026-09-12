@@ -1146,6 +1146,114 @@ main,
   font-size: 11px;
 }
 
+.orchestration-section h2 {
+  word-break: keep-all;
+}
+
+.orchestration-panel {
+  padding: 28px;
+  border: 1px solid var(--rule);
+  background: var(--white);
+}
+
+.orchestration-intro,
+.orchestration-verification,
+.orchestration-decisions p,
+.orchestration-evidence dd {
+  font-size: 1rem;
+  overflow-wrap: anywhere;
+}
+
+.orchestration-components,
+.orchestration-decisions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule-light);
+}
+
+.orchestration-components dt,
+.orchestration-flow .data-node small {
+  color: var(--rose);
+  font-size: 0.875rem;
+}
+
+.orchestration-components dd {
+  margin-top: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.orchestration-flow .data-node {
+  height: 100%;
+  min-height: 96px;
+}
+
+.orchestration-flow .data-node strong {
+  font-size: 1rem;
+}
+
+.orchestration-verification {
+  margin-top: 18px;
+  color: var(--muted);
+}
+
+.orchestration-decisions h3,
+.orchestration-evidence h3 {
+  margin-bottom: 12px;
+  font-size: 1.125rem;
+}
+
+.orchestration-decisions p,
+.orchestration-evidence dd {
+  color: var(--muted);
+}
+
+.orchestration-evidence {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+
+.orchestration-evidence dl > div {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.65fr) minmax(0, 2fr);
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule-light);
+}
+
+.orchestration-evidence dt {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.orchestration-boundary {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 900px) {
+  .orchestration-components,
+  .orchestration-decisions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .orchestration-panel {
+    padding: 20px;
+  }
+
+  .orchestration-evidence dl > div {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+}
+
 .additional-cases {
   padding-top: 8px;
 }
@@ -1455,9 +1563,10 @@ main,
     font-size: 10px;
   }
 
-  .top-nav a:nth-child(3),
-  .top-nav a:nth-child(4),
-  .top-nav a:nth-child(5) {
+  .top-nav a[href="#experience"],
+  .top-nav a[href="#data-model"],
+  .top-nav a[href="#problem-solving"],
+  .top-nav a[href$=".pdf"] {
     display: none;
   }
 

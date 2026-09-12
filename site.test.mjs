@@ -5,8 +5,7 @@ import { fileURLToPath } from "node:url";
 const root = dirname(fileURLToPath(import.meta.url));
 const files = {
   html: resolve(root, "index.html"),
-  css: resolve(root, "styles.css"),
-  notionCss: resolve(root, "notion.css"),
+  css: resolve(root, "portfolio.css"),
   script: resolve(root, "script.js"),
   devServer: resolve(root, "dev-server.mjs"),
   readme: resolve(root, "README.md"),
@@ -29,12 +28,12 @@ const devServer = readFileSync(files.devServer, "utf8");
 const readme = readFileSync(files.readme, "utf8");
 
 const requiredHtml = [
-  "Java/Spring 백엔드 개발자",
-  "총 1년 7개월",
-  "AWS 기반 공개 환경에서 직접 운영",
+  "Java·Spring 백엔드 개발자",
+  "개발부터 운영까지 직접 수행",
+  "공개 환경에서 직접 운영",
   "공개 운영",
   "gowoonmom.kr",
-  "50개 이상 테이블",
+  "50개 이상의 테이블",
   "주문·결제·재고·배송의 핵심 관계",
   "payment_attempt",
   "notification_outbox",
@@ -95,8 +94,10 @@ assert(html.includes('<main id="main-content">'), "main content landmark is miss
 assert(html.includes('class="skip-link"'), "skip link is missing");
 assert(html.includes('aria-label="주요 섹션"'), "navigation label is missing");
 assert((html.match(/class="case-study"/g) || []).length === 5, "exactly five problem-solving case studies are required");
-assert((html.match(/class="data-flow"/g) || []).length === 5, "every case study must contain one data-flow diagram");
-assert((html.match(/data-case-tier="additional" hidden/g) || []).length === 2, "two secondary case studies must start collapsed");
+assert((html.match(/class="data-flow(?: [^"]*)?"/g) || []).length === 6, "case studies and AI orchestration must contain their flow diagrams");
+const additionalCases = html.match(/<details\b([^>]*)>([\s\S]*?)<\/details>/);
+assert(additionalCases && !/\bopen\b/.test(additionalCases[1]), "secondary case studies must start collapsed");
+assert((additionalCases[2].match(/class="case-study"/g) || []).length === 2, "two secondary case studies must be inside the disclosure");
 assert(html.indexOf('id="고운맘"') < html.indexOf('id="experience"'), "gowoonmom project must appear before company experience");
 
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
@@ -104,7 +105,8 @@ assert(ids.length === new Set(ids).size, "duplicate HTML id found");
 
 const navigationBlock = html.match(/<nav class="top-nav"[\s\S]*?<\/nav>/)?.[0] || "";
 const navigationTargets = [...navigationBlock.matchAll(/href="#([^"]+)"/g)].map((match) => match[1]);
-assert(navigationTargets.length === 7, "sidebar navigation must contain seven concise sections");
+assert(navigationTargets.length === 5, "header navigation must contain project, AI, experience, ERD and problem-solving links");
+assert(navigationTargets.includes("ai-orchestration"), "AI orchestration must be reachable from the header");
 
 for (const target of navigationTargets) {
   assert(ids.includes(target), `navigation target is missing: #${target}`);
@@ -164,18 +166,18 @@ const requiredCss = [
   "scroll-margin-top",
   "overflow-wrap: anywhere",
   "@media (prefers-reduced-motion: reduce)",
-  "@media (max-width: 980px)",
-  "@media (max-width: 520px)",
+  "@media (max-width: 900px)",
+  "@media (max-width: 680px)",
   ".case-study-list",
   ".data-flow",
   ".case-summary",
-  ".architecture-card",
+  ".architecture-flow",
   ".erd-lanes",
   ".erd-relation",
 ];
 
 for (const phrase of requiredCss) {
-  assert(css.includes(phrase), `styles.css must include: ${phrase}`);
+  assert(css.includes(phrase), `portfolio.css must include: ${phrase}`);
 }
 
 const requiredScript = ["current-year", "IntersectionObserver", "aria-current", "setActiveSection"];
@@ -197,7 +199,7 @@ for (const phrase of [
   assert(devServer.includes(phrase), `dev-server.mjs must include: ${phrase}`);
 }
 
-for (const phrase of ["지원자 중심", "6개 섹션", "링크와 민감정보", "공개 연락처", "공개 이력서 PDF"]) {
+for (const phrase of ["지원자 중심", "7개 섹션", "링크와 민감정보", "공개 연락처", "공개 이력서 PDF"]) {
   assert(readme.includes(phrase), `README.md must include: ${phrase}`);
 }
 
