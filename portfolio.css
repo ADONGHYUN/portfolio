@@ -235,7 +235,7 @@ main,
   font-style: normal;
 }
 
-.system-summary > div > p:last-child {
+.system-summary > div > p.hero-lead {
   color: var(--muted);
   font-size: 13px;
 }
@@ -609,6 +609,68 @@ main,
 .project-status {
   display: flex;
   gap: 9px;
+}
+
+.system-summary > div > p.hero-scope {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.latest-work {
+  margin-top: 32px;
+  padding: 24px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+}
+
+.latest-work-heading {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.latest-work-heading h3 {
+  font-size: 20px;
+}
+
+.latest-work-heading p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.latest-work dl {
+  margin-top: 16px;
+}
+
+.latest-work dl > div {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 16px;
+  padding: 15px 0;
+  border-top: 1px solid var(--rule-light);
+  font-size: 14px;
+}
+
+.latest-work dt {
+  font-weight: 700;
+}
+
+.latest-work dd {
+  color: var(--muted);
+}
+
+.previous-experience.deployment-experience {
+  border-left: 3px solid var(--rose);
+}
+
+@media (max-width: 680px) {
+  .latest-work dl > div {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
 }
 
 .project-status span,

@@ -33,7 +33,7 @@ const requiredHtml = [
   "공개 환경에서 직접 운영",
   "공개 운영",
   "gowoonmom.kr",
-  "50개 이상의 테이블",
+  "113개 테이블",
   "주문·결제·재고·배송의 핵심 관계",
   "payment_attempt",
   "notification_outbox",
@@ -55,8 +55,8 @@ const requiredHtml = [
   "MariaDB 기반 Public API Rate Limiter",
   "S3 이미지 처리의 재시도와 복구",
   "Spring Legacy · JSP · Oracle DB",
-  "Java 17 · Spring Boot 3.5.16",
-  "Next.js 16.2.11 · React 19.2.4 · TypeScript 5",
+  "Java 17 · Spring Boot 3",
+  "Next.js 16 · React 19 · TypeScript 5",
   "AWS Lightsail",
   "Docker Compose",
   "https://gowoonmom.kr/",
@@ -93,11 +93,11 @@ assert((html.match(/<h1\b/g) || []).length === 1, "index.html must contain exact
 assert(html.includes('<main id="main-content">'), "main content landmark is missing");
 assert(html.includes('class="skip-link"'), "skip link is missing");
 assert(html.includes('aria-label="주요 섹션"'), "navigation label is missing");
-assert((html.match(/class="case-study"/g) || []).length === 5, "exactly five problem-solving case studies are required");
-assert((html.match(/class="data-flow(?: [^"]*)?"/g) || []).length === 6, "case studies and AI orchestration must contain their flow diagrams");
+assert((html.match(/class="case-study"/g) || []).length === 6, "exactly six problem-solving case studies are required");
+assert((html.match(/class="data-flow(?: [^"]*)?"/g) || []).length === 7, "case studies and AI orchestration must contain their flow diagrams");
 const additionalCases = html.match(/<details\b([^>]*)>([\s\S]*?)<\/details>/);
 assert(additionalCases && !/\bopen\b/.test(additionalCases[1]), "secondary case studies must start collapsed");
-assert((additionalCases[2].match(/class="case-study"/g) || []).length === 2, "two secondary case studies must be inside the disclosure");
+assert((additionalCases[2].match(/class="case-study"/g) || []).length === 3, "three secondary case studies must be inside the disclosure");
 assert(html.indexOf('id="고운맘"') < html.indexOf('id="experience"'), "gowoonmom project must appear before company experience");
 
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
