@@ -30,8 +30,10 @@ const readme = readFileSync(files.readme, "utf8");
 const requiredHtml = [
   "Java·Spring 백엔드 개발자",
   "요구사항 정의부터 설계·개발·배포·운영 검증까지",
-  "공개 배포·가오픈 상태",
-  "실제 고객 유입 전 기능 및 운영 검증 단계",
+  "사업자등록 완료",
+  "공개 운영 중",
+  "UI 보완 중으로 일반 주문은 아직 불가합니다",
+  "2024.11.25 - 2025.05.23",
   "gowoonmom.kr",
   "Java/Spring 기반 업무 시스템 개발·운영",
   "메일 시스템 1인 담당 · 인사·노무 개선 사업 개발 참여",
@@ -109,6 +111,9 @@ const forbiddenPublicCopy = [
   "공개 서비스의 활성 기능과는 구분",
   "113개 테이블",
   "Testcontainers",
+  "공개 가오픈",
+  "실제 고객 유입 전",
+  "총 1년 7개월",
 ];
 
 for (const phrase of forbiddenPublicCopy) {
@@ -157,6 +162,11 @@ for (const phrase of [
   "장애 원리를 설명하기 위한 개념 흐름",
   "난수 이름 폴더", "해당 하위 폴더만 삭제",
   "시스템 설정에서 임시 저장소 경로", "추가로 지정한 보호 경로",
+  "금요일 새벽부터 토요일 점심까지",
+  "다음 주 화요일", "당일 저녁",
+  "행정우편의 첨부·발송이 정상 동작하는지 직접 확인",
+  "일반 메일 발송과 행정우편 작성을 동시에 진행",
+  "동일 오류는 재발하지 않았습니다",
   'href="#experience"',
 ]) {
   assert(companyCase.includes(phrase), `mail case must retain its scope: ${phrase}`);
