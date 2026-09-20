@@ -29,32 +29,42 @@ const readme = readFileSync(files.readme, "utf8");
 
 const requiredHtml = [
   "Java·Spring 백엔드 개발자",
-  "개발부터 운영까지 직접 수행",
-  "공개 환경에서 직접 운영",
-  "공개 운영",
+  "요구사항 정의부터 설계·개발·배포·운영 검증까지",
+  "공개 배포·가오픈 상태",
+  "실제 고객 유입 전 기능 및 운영 검증 단계",
   "gowoonmom.kr",
-  "113개 테이블",
+  "Java/Spring 기반 업무 시스템 개발·운영",
+  "메일 시스템 1인 담당 · 인사·노무 개선 사업 개발 참여",
+  "MariaDB 통합 · 통과",
+  "재고 1개에 동일 옵션 예약 요청 2건을 동시에 실행",
+  "최종 reserved_quantity = 1",
   "주문·결제·재고·배송의 핵심 관계",
   "payment_attempt",
   "notification_outbox",
   "사내 메일 시스템 개발·운영",
   "3인 팀",
-  "개발부터 운영 환경의 문제 해결까지 전 범위를 책임",
+  "메일 배포를 인수한 뒤",
   "타 시스템 연계 API 개발 및 유지보수",
-  "스케줄러 기반 API 개발",
-  "실사용 고객을 받기 전",
-  "5분 안에 고객 화면과 운영 구조를 확인",
-  "데이터 흐름으로 설명하는 문제 해결",
-  "결제 상태 수렴",
-  "실시간 재고 동시성 제어",
+  "전체 10개 과업 중",
+  "5개 과업을 개별 담당해 완료하고, 1개 과업을 공동 완료",
+  "1년 미만 대상자에게 연가를 1일씩 부여하는 스케줄러",
+  "OZ Report 기반 근무성적평정 PDF 다운로드",
+  "실패 조건을 정하고, 데이터가 어떻게 남는지 확인",
+  "검증 환경과 범위",
+  "실제 고객 장애 대응이 아니라",
+  "H2(테스트용 DB)",
+  "마지막 1개를 두 요청이 예약한다면",
+  "동일 PAID webhook 동시 처리",
   "inventory_option_balance",
   "원자적 UPDATE",
-  "낙관적 락",
+  "낙관적 충돌 검사",
   "비관적 락",
-  "안전한 소셜 계정 연결",
-  "MariaDB 기반 Public API Rate Limiter",
-  "S3 이미지 처리의 재시도와 복구",
-  "Spring Legacy · JSP · Oracle DB",
+  "ROTATED 후 5초 이내",
+  "예약 가능한 수량을 DB의 갱신 조건으로 강제합니다",
+  "핵심 구현: 재고 예약 SQL",
+  "S3 복사는 성공했는데 DB에 완료를 못 남겼다면",
+  "대안과 선택 이유",
+  "운영 보호 장치",
   "Java 17 · Spring Boot 3",
   "Next.js 16 · React 19 · TypeScript 5",
   "AWS Lightsail",
@@ -83,6 +93,22 @@ const forbiddenPublicCopy = [
   "백엔드 1,593개",
   "프론트 911개",
   "Portfolio URL은 배포 전 교체",
+  "구현·테스트 코드 근거",
+  "이번 작업",
+  "이 작업에서는",
+  "이번 사례",
+  "미실행",
+  "별도 검증 코드",
+  "ProductOptionService",
+  "ProductOptionMapper.xml",
+  "IntegrationTest",
+  "docs/schema.sql",
+  "한계와 다음 판단",
+  "추가 검증이 필요합니다",
+  "큐 도입을 검토합니다",
+  "공개 서비스의 활성 기능과는 구분",
+  "113개 테이블",
+  "Testcontainers",
 ];
 
 for (const phrase of forbiddenPublicCopy) {
@@ -93,15 +119,73 @@ assert((html.match(/<h1\b/g) || []).length === 1, "index.html must contain exact
 assert(html.includes('<main id="main-content">'), "main content landmark is missing");
 assert(html.includes('class="skip-link"'), "skip link is missing");
 assert(html.includes('aria-label="주요 섹션"'), "navigation label is missing");
-assert((html.match(/class="case-study"/g) || []).length === 6, "exactly six problem-solving case studies are required");
-assert((html.match(/class="data-flow(?: [^"]*)?"/g) || []).length === 7, "case studies and AI orchestration must contain their flow diagrams");
-const additionalCases = html.match(/<details\b([^>]*)>([\s\S]*?)<\/details>/);
-assert(additionalCases && !/\bopen\b/.test(additionalCases[1]), "secondary case studies must start collapsed");
-assert((additionalCases[2].match(/class="case-study"/g) || []).length === 3, "three secondary case studies must be inside the disclosure");
+const cases = [...html.matchAll(/<article id="(case-[^"]+)" class="case-study">([\s\S]*?)<\/article>/g)];
+assert(cases.length === 4, "four primary Gowoonmom cases are required");
+for (const [, id, content] of cases) {
+  for (const phrase of ["문제와 제약", "대안과 선택 이유", "실제 구현", 'class="data-flow"', "검증 시나리오와 결과", "운영 보호 장치", 'class="case-brief"', "<dt>선택</dt>", "<dt>검증</dt>"]) {
+    assert(content.includes(phrase), `${id} must include ${phrase}`);
+  }
+  assert(!/<details\b[^>]*\bopen\b/.test(content), `${id} implementation details must start collapsed`);
+  assert(content.indexOf('class="case-brief"') < content.indexOf('class="case-summary"'), `${id} must show choice and verification before the detailed explanation`);
+  const checks = content.match(/<div class="case-checks"[\s\S]*?<\/dl>/)?.[0] || "";
+  assert(!checks.includes("evidence-pending"), `${id} must not mix unverified expectations with confirmed results`);
+}
+const reservationSql = html.match(/<pre class="implementation-code"><code>([\s\S]*?)<\/code><\/pre>/)?.[1] || "";
+for (const guard of ["UPDATE inventory_option_balance", "stock_quantity - reserved_quantity - sales_hold_quantity &gt;= #{quantity}", "po.deleted_at IS NULL", "po.option_status = 'SELLABLE'", "p.deleted_at IS NULL", "p.product_status = 'ACTIVE'"]) {
+  assert(reservationSql.includes(guard), `visible reservation SQL must retain its guard: ${guard}`);
+}
+assert(html.indexOf('id="problem-solving"') < html.indexOf('id="data-model"'), "technical cases must precede the detailed ERD");
+assert(html.indexOf('id="problem-solving"') < html.indexOf('id="ai-orchestration"'), "AI tooling must not displace the core backend cases");
 assert(html.indexOf('id="고운맘"') < html.indexOf('id="experience"'), "gowoonmom project must appear before company experience");
+assert(html.indexOf('id="ai-orchestration"') < html.indexOf('id="experience"'), "company content must preserve the existing AI section order");
+
+const companyExperience = html.match(/<section id="experience"[\s\S]*?(?=<section id="stack")/)?.[0] || "";
+const companyCase = companyExperience.match(/<article id="mail-incident"[\s\S]*?<\/article>/)?.[0] || "";
+assert(companyCase, "the company mail incident case is missing");
+for (const phrase of [
+  'href="#mail-incident"',
+  "공용 첨부 임시폴더 삭제로 발생한 행정우편 장애 해결",
+  "전달받은 파일·설정 목록에 따라 수행",
+  "배포 목록의 파일 누락과 아래 첨부파일 삭제 오류는 별개의 문제",
+  "폐쇄망 상주 환경",
+  "기존 시스템을 직접 분석·수정하고 운영 배포를 수행",
+]) {
+  assert(companyExperience.includes(phrase), `company experience must include: ${phrase}`);
+}
+for (const phrase of [
+  "<dt>문제</dt>", "<dt>조치</dt>", "<dt>내 역할</dt>",
+  "장애 원리를 설명하기 위한 개념 흐름",
+  "난수 이름 폴더", "해당 하위 폴더만 삭제",
+  "시스템 설정에서 임시 저장소 경로", "추가로 지정한 보호 경로",
+  'href="#experience"',
+]) {
+  assert(companyCase.includes(phrase), `mail case must retain its scope: ${phrase}`);
+}
+assert(!/<details\b[^>]*\bopen\b/.test(companyCase), "company case details must initially be collapsed");
+assert(!/<img\b/.test(companyCase), "company case must not present invented screenshots as evidence");
+for (const unsupportedClaim of [
+  "전 시스템 배포 총괄", "전체 전환 사업 리딩", "기여도 60%", "생산성 2배",
+  "일정 50%", "조기 완료", "재발 0건", "자동화 테스트", "회귀 테스트",
+  "UUID", "심볼릭 링크", "경로 정규화", "분산 락", "트랜잭션 격리",
+  "체크리스트 자동화", "AI를 전혀 사용하지", "추후 작성",
+]) {
+  assert(!companyExperience.includes(unsupportedClaim), `unverified company claim: ${unsupportedClaim}`);
+}
 
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
 assert(ids.length === new Set(ids).size, "duplicate HTML id found");
+for (const [, references] of html.matchAll(/aria-labelledby="([^"]+)"/g)) {
+  for (const id of references.split(/\s+/)) assert(ids.includes(id), `accessible heading target is missing: ${id}`);
+}
+const workSummary = html.match(/<aside class="work-summary"[\s\S]*?<\/aside>/)?.[0] || "";
+assert(workSummary.includes('href="#experience"'), "the concise work summary must link to full company experience");
+assert(html.indexOf(workSummary) > html.indexOf('id="hero-title"') && html.indexOf(workSummary) < html.indexOf('id="고운맘"'), "the work summary must be secondary to the hero and visible before long case details");
+const stack = html.match(/<section id="stack"[\s\S]*?<\/section>/)?.[0] || "";
+assert((stack.match(/<article>/g) || []).length === 6, "the technology stack must use six concise tool categories");
+for (const detail of ["JSON Schema", "격리 작업 공간", "상태 머신", "Heartbeat", "Lease", "불변 revision", "입력 스냅샷", "상품 기준 해시"]) {
+  assert(!stack.includes(detail), `implementation detail belongs in a case, not the stack: ${detail}`);
+}
+assert(!companyExperience.includes("GPT") && !companyExperience.includes("코딩 에이전트"), "company environment copy must stay concise");
 
 const navigationBlock = html.match(/<nav class="top-nav"[\s\S]*?<\/nav>/)?.[0] || "";
 const navigationTargets = [...navigationBlock.matchAll(/href="#([^"]+)"/g)].map((match) => match[1]);
@@ -174,11 +258,22 @@ const requiredCss = [
   ".architecture-flow",
   ".erd-lanes",
   ".erd-relation",
+  ".company-case-summary",
+  ".company-case-details > summary",
+  ".mail-interference",
+  ".work-summary",
+  ".case-brief",
 ];
 
 for (const phrase of requiredCss) {
   assert(css.includes(phrase), `portfolio.css must include: ${phrase}`);
 }
+
+const sectionHeadingRule = css.match(/(?:^|\n)\.section-heading\s*\{([^}]+)\}/)?.[1] || "";
+assert(sectionHeadingRule.includes("grid-template-columns: minmax(0, 1fr)"), "all section headings must stack the eyebrow, title and description in one column");
+assert(sectionHeadingRule.includes("align-items: start"), "section headings must align their content at the start");
+const projectHeadingRule = css.match(/(?:^|\}\s*)\.project-heading\s*\{([^}]+)\}/)?.[1] || "";
+assert(projectHeadingRule.includes("grid-template-columns: minmax(0, 1fr) auto"), "project title and status must keep their distinct desktop layout");
 
 const requiredScript = ["current-year", "IntersectionObserver", "aria-current", "setActiveSection"];
 for (const phrase of requiredScript) {
