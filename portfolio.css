@@ -717,7 +717,7 @@ main,
 
 .project-overview {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(390px, 0.85fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 30px;
 }
 
@@ -749,8 +749,9 @@ main,
 }
 
 .project-copy > p:not(.tag-list):not(.scope-note) {
+  max-width: 88ch;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .project-facts {
@@ -929,6 +930,8 @@ main,
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
+  margin-top: 32px;
+  scroll-margin-top: 110px;
 }
 
 .experience-card {
@@ -1350,7 +1353,7 @@ main,
 
 .case-brief {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
   margin-top: 22px;
   padding: 18px 20px;
@@ -1392,11 +1395,19 @@ main,
 }
 
 .project-design-note strong { display: block; margin-bottom: 6px; }
-#고운맘 .architecture-flow { grid-template-columns: 1fr; gap: 8px; }
-#고운맘 .architecture-node { min-height: 0; padding: 14px 18px; }
-#고운맘 .architecture-node strong { font-size: 17px; }
-#고운맘 .architecture-node span { font-size: 13px; }
-#고운맘 .architecture-flow .flow-arrow { font-size: 12px; line-height: 1.5; }
+.architecture-support {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: start;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+.architecture-support > * { min-width: 0; margin: 0; }
+.architecture-support .architecture-flow { grid-template-columns: 1fr; gap: 8px; }
+.architecture-support .architecture-node { min-height: 0; padding: 14px 18px; }
+.architecture-support .architecture-node strong { font-size: 17px; }
+.architecture-support .architecture-node span { font-size: 13px; }
+.architecture-support .architecture-flow .flow-arrow { font-size: 12px; line-height: 1.5; }
 .verification-boundary p { margin-top: 6px; color: var(--muted); }
 
 .implementation-results {
@@ -1455,6 +1466,8 @@ main,
 
 @media (max-width: 900px) {
   .case-index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .case-brief,
+  .architecture-support { grid-template-columns: minmax(0, 1fr); }
   .case-index a { border-bottom: 1px solid var(--rule-light); }
   .implementation-results { grid-template-columns: 1fr; gap: 0; }
   .problem-section .case-summary { grid-template-columns: 1fr; }

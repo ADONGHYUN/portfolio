@@ -36,7 +36,7 @@ const requiredHtml = [
   "2024.11.25 - 2025.05.23",
   "gowoonmom.kr",
   "Java/Spring 기반 업무 시스템 개발·운영",
-  "메일 시스템 1인 담당 · 인사·노무 개선 사업 개발 참여",
+  "메일 시스템을 단독 운영하면서 인사·노무 개선 사업의 기능 개발을 병행",
   "MariaDB 통합 · 통과",
   "재고 1개에 동일 옵션 예약 요청 2건을 동시에 실행",
   "최종 reserved_quantity = 1",
@@ -127,11 +127,11 @@ assert(html.includes('aria-label="주요 섹션"'), "navigation label is missing
 const cases = [...html.matchAll(/<article id="(case-[^"]+)" class="case-study">([\s\S]*?)<\/article>/g)];
 assert(cases.length === 4, "four primary Gowoonmom cases are required");
 for (const [, id, content] of cases) {
-  for (const phrase of ["문제와 제약", "대안과 선택 이유", "실제 구현", 'class="data-flow"', "검증 시나리오와 결과", "운영 보호 장치", 'class="case-brief"', "<dt>선택</dt>", "<dt>검증</dt>"]) {
+  for (const phrase of ["원인과 제약", "대안과 선택 이유", "실제 구현", 'class="data-flow"', "검증 시나리오와 결과", "운영 보호 장치", 'class="case-brief"', "<dt>문제</dt>", "<dt>선택</dt>", "<dt>검증</dt>"]) {
     assert(content.includes(phrase), `${id} must include ${phrase}`);
   }
   assert(!/<details\b[^>]*\bopen\b/.test(content), `${id} implementation details must start collapsed`);
-  assert(content.indexOf('class="case-brief"') < content.indexOf('class="case-summary"'), `${id} must show choice and verification before the detailed explanation`);
+  assert(content.indexOf('class="case-brief"') < content.indexOf('class="case-summary"'), `${id} must show problem, choice and verification before the detailed explanation`);
   const checks = content.match(/<div class="case-checks"[\s\S]*?<\/dl>/)?.[0] || "";
   assert(!checks.includes("evidence-pending"), `${id} must not mix unverified expectations with confirmed results`);
 }
@@ -142,11 +142,15 @@ for (const guard of ["UPDATE inventory_option_balance", "stock_quantity - reserv
 assert(html.indexOf('id="problem-solving"') < html.indexOf('id="data-model"'), "technical cases must precede the detailed ERD");
 assert(html.indexOf('id="problem-solving"') < html.indexOf('id="ai-orchestration"'), "AI tooling must not displace the core backend cases");
 assert(html.indexOf('id="고운맘"') < html.indexOf('id="experience"'), "gowoonmom project must appear before company experience");
-assert(html.indexOf('id="ai-orchestration"') < html.indexOf('id="experience"'), "company content must preserve the existing AI section order");
+assert(html.indexOf('id="problem-solving"') < html.indexOf('id="experience"'), "Gowoonmom cases must remain the primary cases");
+assert(html.indexOf('id="experience"') < html.indexOf('id="ai-orchestration"'), "company problem solving must precede AI tooling");
+assert(html.indexOf('id="experience"') < html.indexOf('id="data-model"'), "company problem solving must precede the detailed architecture and ERD");
+assert(html.indexOf('class="architecture-support"') > html.indexOf('id="data-model"'), "the architecture must support the cases rather than delay them");
 
-const companyExperience = html.match(/<section id="experience"[\s\S]*?(?=<section id="stack")/)?.[0] || "";
+const companyExperience = html.match(/<section id="experience"[\s\S]*?(?=\n      <section id=")/)?.[0] || "";
 const companyCase = companyExperience.match(/<article id="mail-incident"[\s\S]*?<\/article>/)?.[0] || "";
 assert(companyCase, "the company mail incident case is missing");
+assert(companyExperience.indexOf('id="mail-incident"') < companyExperience.indexOf('id="company-responsibilities"'), "the company incident must precede routine responsibilities");
 for (const phrase of [
   'href="#mail-incident"',
   "공용 첨부 임시폴더 삭제로 발생한 행정우편 장애 해결",
@@ -158,7 +162,7 @@ for (const phrase of [
   assert(companyExperience.includes(phrase), `company experience must include: ${phrase}`);
 }
 for (const phrase of [
-  "<dt>문제</dt>", "<dt>조치</dt>", "<dt>내 역할</dt>",
+  "<dt>문제</dt>", "<dt>핵심 판단</dt>", "<dt>확인 결과</dt>",
   "장애 원리를 설명하기 위한 개념 흐름",
   "난수 이름 폴더", "해당 하위 폴더만 삭제",
   "시스템 설정에서 임시 저장소 경로", "추가로 지정한 보호 경로",
@@ -167,7 +171,7 @@ for (const phrase of [
   "행정우편의 첨부·발송이 정상 동작하는지 직접 확인",
   "일반 메일 발송과 행정우편 작성을 동시에 진행",
   "동일 오류는 재발하지 않았습니다",
-  'href="#experience"',
+  'href="#company-responsibilities"',
 ]) {
   assert(companyCase.includes(phrase), `mail case must retain its scope: ${phrase}`);
 }
@@ -188,7 +192,7 @@ for (const [, references] of html.matchAll(/aria-labelledby="([^"]+)"/g)) {
   for (const id of references.split(/\s+/)) assert(ids.includes(id), `accessible heading target is missing: ${id}`);
 }
 const workSummary = html.match(/<aside class="work-summary"[\s\S]*?<\/aside>/)?.[0] || "";
-assert(workSummary.includes('href="#experience"'), "the concise work summary must link to full company experience");
+assert(workSummary.includes('href="#mail-incident"'), "the concise work summary must link directly to the incident");
 assert(html.indexOf(workSummary) > html.indexOf('id="hero-title"') && html.indexOf(workSummary) < html.indexOf('id="고운맘"'), "the work summary must be secondary to the hero and visible before long case details");
 const stack = html.match(/<section id="stack"[\s\S]*?<\/section>/)?.[0] || "";
 assert((stack.match(/<article>/g) || []).length === 6, "the technology stack must use six concise tool categories");
@@ -273,6 +277,7 @@ const requiredCss = [
   ".mail-interference",
   ".work-summary",
   ".case-brief",
+  ".architecture-support",
 ];
 
 for (const phrase of requiredCss) {
