@@ -64,7 +64,7 @@ const requiredHtml = [
   "ROTATED 후 5초 이내",
   "예약 가능한 수량을 DB의 갱신 조건으로 강제합니다",
   "핵심 구현: 재고 예약 SQL",
-  "S3 복사는 성공했는데 DB에 완료를 못 남겼다면",
+  "S3와 DB의 부분 실패 복구",
   "대안과 선택 이유",
   "운영 보호 장치",
   "Java 17 · Spring Boot 3",
@@ -153,7 +153,7 @@ assert(companyCase, "the company mail incident case is missing");
 assert(companyExperience.indexOf('id="mail-incident"') < companyExperience.indexOf('id="company-responsibilities"'), "the company incident must precede routine responsibilities");
 for (const phrase of [
   'href="#mail-incident"',
-  "공용 첨부 임시폴더 삭제로 발생한 행정우편 장애 해결",
+  "행정우편 첨부파일 삭제 장애 해결",
   "전달받은 파일·설정 목록에 따라 수행",
   "배포 목록의 파일 누락과 아래 첨부파일 삭제 오류는 별개의 문제",
   "폐쇄망 상주 환경",
@@ -191,9 +191,10 @@ assert(ids.length === new Set(ids).size, "duplicate HTML id found");
 for (const [, references] of html.matchAll(/aria-labelledby="([^"]+)"/g)) {
   for (const id of references.split(/\s+/)) assert(ids.includes(id), `accessible heading target is missing: ${id}`);
 }
-const workSummary = html.match(/<aside class="work-summary"[\s\S]*?<\/aside>/)?.[0] || "";
-assert(workSummary.includes('href="#mail-incident"'), "the concise work summary must link directly to the incident");
-assert(html.indexOf(workSummary) > html.indexOf('id="hero-title"') && html.indexOf(workSummary) < html.indexOf('id="고운맘"'), "the work summary must be secondary to the hero and visible before long case details");
+const hero = html.match(/<section id="top"[\s\S]*?<\/section>/)?.[0] || "";
+assert(hero.includes('href="#mail-incident"'), "the hero must link directly to the incident");
+assert(hero.includes('href="#problem-solving"'), "the hero must link to the technical cases");
+assert(!hero.includes('class="case-index"'), "the four-case index belongs with the technical cases");
 const stack = html.match(/<section id="stack"[\s\S]*?<\/section>/)?.[0] || "";
 assert((stack.match(/<article>/g) || []).length === 6, "the technology stack must use six concise tool categories");
 for (const detail of ["JSON Schema", "격리 작업 공간", "상태 머신", "Heartbeat", "Lease", "불변 revision", "입력 스냅샷", "상품 기준 해시"]) {

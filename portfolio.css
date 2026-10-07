@@ -6,15 +6,15 @@
   --white: #fbfaf7;
   --ink: #16171b;
   --muted: #62636a;
-  --rule: #b7b4ad;
+  --rule: #d5d2cb;
   --rule-light: #d6d2c9;
   --rose: #923846;
   --rose-dark: #672631;
   --blue: #1767a6;
   --green: #11774f;
-  --max-width: 1390px;
+  --max-width: 1200px;
   color-scheme: light;
-  font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Inter, system-ui, sans-serif;
+  font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Inter, system-ui, sans-serif;
 }
 
 * {
@@ -27,11 +27,7 @@ html {
 
 body {
   margin: 0;
-  background:
-    linear-gradient(rgba(24, 25, 29, 0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(24, 25, 29, 0.018) 1px, transparent 1px),
-    var(--paper);
-  background-size: 32px 32px;
+  background: var(--paper);
   color: var(--ink);
   line-height: 1.65;
   word-break: keep-all;
@@ -1310,23 +1306,6 @@ main,
   font-size: 11px;
 }
 
-/* Gowoonmom case narratives: keep company experience styles unchanged. */
-#top .system-summary {
-  grid-template-columns: 1fr;
-  gap: 28px;
-}
-
-#top .system-summary h1 {
-  white-space: normal;
-  max-width: 1050px;
-  font-size: clamp(28px, 3.1vw, 46px);
-}
-
-#top .system-summary > div > p.hero-lead {
-  margin-top: 16px;
-  font-size: 16px;
-}
-
 .case-index {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2306,5 +2285,404 @@ main,
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+}
+
+/* Reading hierarchy: identity, visible results, then optional technical detail. */
+.site-header {
+  grid-template-columns: auto minmax(0, 1fr);
+  border-top: 0;
+}
+
+.top-nav {
+  gap: 22px;
+  border-left: 0;
+  min-width: 0;
+  scrollbar-width: none;
+  overscroll-behavior-inline: contain;
+}
+
+.top-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.top-nav a {
+  font-size: 13px;
+}
+
+:where(a, summary):focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+
+.section-band {
+  padding-block: 72px;
+}
+
+.hero {
+  padding-block: 64px;
+}
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 52px;
+}
+
+.hero-layout > .system-summary {
+  display: block;
+  min-width: 0;
+  margin: 0;
+}
+
+.hero-role {
+  margin-bottom: 12px;
+  color: var(--rose);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.system-summary h1 {
+  margin-bottom: 20px;
+  font-size: clamp(40px, 4vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  white-space: normal;
+}
+
+.hero-statement {
+  font-size: clamp(24px, 2.3vw, 32px);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.045em;
+}
+
+.system-summary > p.hero-lead {
+  max-width: 40ch;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+.system-summary .system-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.button {
+  min-height: 48px;
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.service-preview {
+  min-width: 0;
+}
+
+.service-preview > a {
+  display: block;
+}
+
+.service-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule-light);
+  border-radius: 10px;
+}
+
+.service-preview figcaption {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 16px;
+  font-size: 15px;
+}
+
+.service-preview p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.section-heading,
+.project-heading {
+  margin-bottom: 28px;
+}
+
+.section-heading h2,
+.project-heading h2 {
+  font-size: clamp(28px, 3vw, 38px);
+  line-height: 1.3;
+  letter-spacing: -0.04em;
+}
+
+.section-heading > p:last-child,
+.project-lead {
+  max-width: 76ch;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.project-copy {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.project-copy h3 {
+  max-width: none;
+  margin-bottom: 14px;
+  font-size: 23px;
+}
+
+.project-copy > p + p {
+  margin-top: 12px;
+}
+
+.project-copy .system-facts {
+  margin-top: 28px;
+}
+
+.system-facts dd,
+.system-facts a {
+  margin: 0;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.system-facts dt,
+.project-facts dt {
+  font-size: 12px;
+}
+
+.project-facts {
+  border: 0;
+  margin: 24px 0;
+}
+
+.project-facts div {
+  padding-block: 0;
+}
+
+.scope-note,
+.disclosure-note,
+.erd-disclosure {
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.case-index {
+  gap: 16px;
+  margin-bottom: 24px;
+  border: 0;
+}
+
+.case-index a {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: start;
+  gap: 8px;
+  padding: 12px 0;
+  border: 0;
+  border-top: 1px solid var(--rule-light);
+}
+
+.case-index a > span:first-child {
+  color: var(--rose);
+}
+
+.case-index strong {
+  font-size: 15px;
+}
+
+.case-index .case-question {
+  grid-column: 1 / -1;
+  font-size: 13px;
+}
+
+.verification-boundary {
+  padding: 16px 20px;
+  border-left-width: 2px;
+  font-size: 14px;
+}
+
+.verification-details {
+  margin-top: 8px;
+}
+
+.verification-details > summary {
+  width: fit-content;
+  padding: 6px 0;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+.case-study-list {
+  gap: 24px;
+}
+
+.case-study {
+  border-color: var(--rule-light);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.case-study-heading {
+  gap: 14px;
+}
+
+.problem-section .case-study-heading h3 {
+  font-size: 24px;
+  line-height: 1.4;
+}
+
+.problem-section .case-study-heading .case-result {
+  margin: 8px 0 0;
+  color: var(--rose-dark);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.case-brief {
+  padding: 0;
+  background: transparent;
+}
+
+.case-details {
+  margin-top: 24px;
+  border-top: 1px solid var(--rule-light);
+}
+
+.case-details > summary,
+.company-case-details > summary {
+  padding: 14px 0;
+  min-height: 48px;
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.case-details > summary:hover {
+  color: var(--rose-dark);
+}
+
+.company-case h3 {
+  font-size: 26px;
+  line-height: 1.4;
+}
+
+.stack-grid article,
+.contact-grid article {
+  min-height: 0;
+  padding: 20px 0;
+  border: 0;
+  border-top: 1px solid var(--rule-light);
+  background: transparent;
+}
+
+.stack-grid p,
+.contact-grid a {
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .site-header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .top-nav {
+    justify-content: flex-start;
+    padding: 0;
+  }
+
+  .top-nav a {
+    padding-block: 12px;
+  }
+
+  .hero-layout {
+    gap: 28px;
+  }
+
+  .desktop-break {
+    display: none;
+  }
+}
+
+@media (max-width: 680px) {
+  body {
+    word-break: keep-all;
+  }
+
+  .hero-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .hero,
+  .section-band {
+    padding-block: 44px;
+  }
+
+  .top-nav {
+    gap: 20px;
+    padding: 0 4px;
+  }
+
+  .top-nav a[href="#data-model"],
+  .top-nav a[href="#problem-solving"],
+  .top-nav a[href$=".pdf"] {
+    display: block;
+  }
+
+  .top-nav a {
+    flex-shrink: 0;
+    font-size: 12px;
+  }
+
+  .system-summary .system-actions {
+    gap: 10px;
+  }
+
+  .system-summary .button {
+    flex: 1 1 140px;
+    padding-inline: 10px;
+    font-size: 13px;
+  }
+
+  .case-index {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+
+  .case-index .case-question {
+    display: none;
+  }
+
+  .problem-section .case-study-heading h3 {
+    font-size: 21px;
+  }
+
+  .company-case h3 {
+    font-size: 22px;
+  }
+
+  .project-facts div {
+    padding: 12px 0;
+  }
+
+  .scope-note,
+  .case-study-heading p,
+  .service-preview p {
+    overflow-wrap: anywhere;
   }
 }
