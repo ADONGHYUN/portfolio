@@ -1,5 +1,15 @@
 # Design QA
 
+## 2026-10-01 구매 흐름 사례 보완
+
+- 현재 구현: `C:\dh\gowoonmom\portfolio\index.html`, `portfolio.css`.
+- 기존 네 가지 핵심 사례 뒤에 장바구니 저장 불확실성·결제 재시도·상품 카드 일괄 조회·키보드 조작 내용을 추가했다. 회사 경험과 기존 사례의 검증일은 유지했다.
+- 로컬 개발 화면에서 320·390·768·1280px의 문서 가로 넘침이 없음을 확인했다. 새 사례 영역은 320·390px에서 1열, 768·1280px에서 2열이다.
+- 390 × 844에서 새 제목·네 사례·검증 안내의 실제 줄바꿈과 표시를 확인했다. 1280 × 900에서는 네 사례를 2열로 읽을 수 있다. 브라우저 콘솔 오류·경고는 없었다.
+- `site.test.mjs`, `dev-server.test.mjs` 3개 테스트, JavaScript 문법 검사, `git diff --check`, 프로덕션 빌드가 통과했다. 내부 앵커와 PDF·자산 경로는 정적 검사로 확인했다.
+- 데스크톱 화면 근거: `C:\Users\PC\.codex\visualizations\2026\10\01\01a0f4c8-6e51-70e0-8e41-45a03212d40e\portfolio-update-desktop.jpg`.
+- 아래 디자인 비교는 이전 작업 환경에서 보관한 과거 근거다. 최신 화면이나 현재 PC의 실행 경로로 간주하지 않는다.
+
 ## Scope
 
 - Selected direction: `02 — Living System Map`

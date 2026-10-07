@@ -3,14 +3,14 @@
 `고운맘`에서 재현·검증한 재고·결제·실패 복구·인증 문제와, 회사 메일 시스템의 실제 운영 장애 해결 경험을 중심으로 구성한 포트폴리오입니다. AI 상품 상세 제작과 AI 개발 작업은 생성 결과의 검증·안전한 반영이라는 관점에서 소개합니다.
 프로젝트 기술 설명서가 아니라 채용 담당자가 지원자의 책임 범위와 문제 해결 방식을 빠르게 파악하는 제출본을 목표로 합니다.
 
-고운맘 본문은 2026-09-19 선별 검증과 2026-09-20 재고 동시 예약 검증을 기준으로 합니다. 지원자가 확인한 현재 상태는 사업자등록 완료·공개 운영 중이며, UI 보완 중으로 일반 고객의 정상 주문은 아직 불가합니다. 로컬 코드와 테스트의 확인은 최신 운영 배포나 외부 제공자 실환경 검증을 뜻하지 않습니다. 회사 경험은 지원자가 직접 제공한 사실관계로 작성하며, 고운맘 코드나 테스트를 회사 경험의 근거로 사용하지 않습니다.
+고운맘의 핵심 네 사례는 2026-09-19 선별 검증과 2026-09-20 재고 동시 예약 검증을 기준으로 합니다. 구매 흐름의 추가 개선은 2026-10-01 현재 코드와 선별 테스트로 확인했습니다. 지원자가 확인한 현재 상태는 사업자등록 완료·공개 운영 중이며, UI 보완 중으로 일반 고객의 정상 주문은 아직 불가합니다. 로컬 코드와 테스트의 확인은 최신 운영 배포나 외부 제공자 실환경 검증을 뜻하지 않습니다. 회사 경험은 지원자가 직접 제공한 사실관계로 작성하며, 고운맘 코드나 테스트를 회사 경험의 근거로 사용하지 않습니다.
 
 ## 정보 구조
 
 첫 화면의 사례 바로가기 아래에 다음 7개 섹션을 구성합니다.
 
 1. 대표 프로젝트: 해결하려는 상태 불일치 문제, 1인 책임 범위와 현재 서비스 상태를 짧게 소개
-2. 고운맘 문제 해결: 주문·재고 동시성, 결제 정합성, 이미지 부분 성공 복구, 인증의 네 가지 사례. 문제·선택·검증 요약 다음에 원인·대안·구현·데이터 흐름·검증 시나리오 제시
+2. 고운맘 문제 해결: 주문·재고 동시성, 결제 정합성, 이미지 부분 성공 복구, 인증의 네 가지 사례. 문제·선택·검증 요약 다음에 원인·대안·구현·데이터 흐름·검증 시나리오 제시. 하단에 장바구니 저장 불확실성·결제 재시도·상품 일괄 조회·키보드 조작 개선을 짧게 소개하고 별도 검증일과 환경 표시
 3. 회사 문제 해결: 공용 첨부 임시폴더 삭제 장애의 문제·핵심 판단·확인 결과를 먼저 표시. 상세 원인·수정·배포·검증 과정은 접어서 표시하고 담당 업무와 경력은 그 뒤에 배치
 4. AI 결과 검증: 생성 결과와 실제 실행 근거의 차이, 원본 코드 변경 충돌, 상품 데이터 변경을 다루는 방식과 사람의 판단·승인 책임. 상세 실행기는 접어서 표시
 5. 설계 근거·ERD: 앞의 사례를 뒷받침하는 아키텍처·트랜잭션 경계와 주문 스냅샷·결제 시도·원장·재고·외부 작업의 수명을 분리한 이유. 전체 테이블 수는 공개 본문에서 제외
@@ -28,6 +28,8 @@ ERD와 문제 해결 사례는 별도 이미지 파일 없이 HTML/CSS로 구성
 - ERD: `../docs/schema.sql`을 기준으로 `user_account`, `sales_order`, `sales_order_item`의 현행 이름과 비회원 주문의 nullable 회원 참조를 반영했습니다. 옵션·재고의 1:1 표기는 도메인 생성 규칙을 포함합니다. 테이블 개수 대신 모델링 경계를 설명합니다.
 - AI 상품 상세 제작: `../docs/ai-product-detail-authoring-api.md`, `../gowoonmom/src/main/java/ko/dh/gowoonmom/product/authoring/AuthoringService.java`, `../gowoonmom-web/src/components/admin/product-detail-authoring/ProductDetailAuthoringDetail.tsx`.
 - AI 개발 자동화: `../docs/ai-development-orchestrator.md`, `../tools/development-runner/README.md`. 모델 제안과 실행기의 파일 적용·검증을 분리하며 로컬 Codex App Server 연결을 사용합니다.
+- 구매 흐름 개선: `../gowoonmom-web/src/components/cart/CartClient.tsx`, `CartQuantityControl.tsx`, `../gowoonmom-web/src/lib/checkout/paymentReturnFinalization.ts`, `../gowoonmom-web/src/components/common/useAccessibleDialog.ts`, `../gowoonmom-web/src/components/address/KakaoPostcodeSearchButton.tsx`와 관련 테스트. 서버 응답이 불확실할 때의 주문 차단, 결제 재시도와 완료 후 정리, 포커스 복구·늦은 주소 검색 결과 거절을 확인합니다.
+- 상품 카드 일괄 조회: `../gowoonmom/src/main/java/ko/dh/gowoonmom/product/service/ProductService.java`, `HomeSectionsService.java`와 `../gowoonmom/src/test/java/ko/dh/gowoonmom/product/service/ProductServiceCardOptionsTest.java`, `HomeDiscoveryProductsServiceTest.java`. 옵션 조회의 500개 ID 상한은 구현 기준이며, 실행한 단위 테스트의 데이터 규모는 24개 상품·13개 더보기 후보입니다. 실제 DB 실행계획·대규모 부하 검증 결과로 확대하지 않습니다.
 - 교환·운영 감시·소셜 연결 해제: `../docs/exchange-api.md`, `../docs/operations-monitoring.md`, `../docs/social-unlink-operations.md`.
 - 회사 경험: 지원자가 제공한 근무 기간·역할·운영 장애 원인·적용한 수정을 기준으로 작성합니다. 브라우저 전환 사업에서는 전달받은 목록에 따른 메일 배포를 인수한 범위이며 전환 개발이나 전 시스템 배포 총괄로 표현하지 않습니다.
 - 메일 사례의 A/B 그림은 장애 원리를 설명하는 개념 흐름이며 실제 로그를 옮긴 것이 아닙니다. 지원자는 사업건의 금요일 새벽~토요일 점심 배포, 다음 주 화요일 원인 파악·당일 저녁 수정 배포, 수정 후 행정우편 첨부·발송 및 일반 메일과의 동시 사용 확인, 수정 배포 이후 동일 오류 미재발을 확인했습니다. 자동 테스트 실행, 정확한 사고 날짜·관찰 기간·재발률, 경로 정규화 API 등 제공되지 않은 내용은 덧붙이지 않습니다.
@@ -48,7 +50,7 @@ ERD와 문제 해결 사례는 별도 이미지 파일 없이 HTML/CSS로 구성
 백엔드 구현 루트는 `../gowoonmom/src/main/java/ko/dh/gowoonmom/`, 일반 테스트 루트는 `../gowoonmom/src/test/java/ko/dh/gowoonmom/`입니다. 결과 XML은 `../gowoonmom/build/test-results/test/`에서 확인했으며 공개 자산에 원시 로그를 복사하지 않습니다.
 
 ```powershell
-cd D:\dev\gowoonmom\gowoonmom
+cd C:\dh\gowoonmom\gowoonmom
 .\gradlew.bat test --tests '*ProductOptionBulkStockIntegrationTest' --tests '*PortOnePaymentLifecycleIntegrationTest' --tests '*PaymentTxServiceTest' --tests '*AuthServiceTest' --tests '*ImageUploadOutboxTransactionIntegrationTest' --tests '*ImageUploadOutboxS3RestartIntegrationTest' --tests '*ImageUploadOutboxLeaseFenceIntegrationTest' --no-daemon
 ```
 
@@ -59,16 +61,42 @@ cd D:\dev\gowoonmom\gowoonmom
 기존 `../scripts/run-isolated-mariadb-tests.ps1`로 MariaDB 11.4.11의 별도 임시 데이터 폴더·전용 계정·loopback 53306 인스턴스를 생성했습니다. 테스트 후 프로세스와 임시 데이터가 정리되며 일반 개발 DB·운영 DB·비밀정보 설정을 사용하지 않습니다. Docker 엔진이 실행 중이지 않아 Testcontainers는 도입하지 않았고, 테스트 코드는 새로 추가하지 않았습니다.
 
 ```powershell
-cd D:\dev\gowoonmom
+cd C:\dh\gowoonmom
 .\scripts\run-isolated-mariadb-tests.ps1 -Tests '*MariaDbPaymentTxServiceConcurrencyIntegrationTest.concurrentSingleUnitReservationsAllowExactlyOneAndOnlyAdvanceInventoryVersion'
 ```
 
 결과는 `../gowoonmom/build/test-results/mariaDbIntegrationTest/TEST-ko.dh.gowoonmom.payment.service.MariaDbPaymentTxServiceConcurrencyIntegrationTest.xml`에서 확인했습니다. 이 실행은 해당 메서드 1개에 한정되며 같은 클래스의 중복 결제 테스트나 다른 MariaDB 테스트를 실행한 것으로 표시하지 않습니다. 실제 PG·AWS 장애, 부하 테스트, AI 실행기 종단 테스트와 프론트 제품 전체 회귀는 이 검증 범위 밖입니다.
 
+### 2026-10-01 구매 흐름·상품 조회 선별 검증
+
+현재 코드에서 아래 테스트를 실행했습니다. 기존 핵심 네 사례의 검증일을 갱신하거나 제품 전체 회귀·운영 배포 확인으로 표시하지 않습니다.
+
+| 범위 | 실행한 테스트 | 환경·결과 |
+| --- | --- | --- |
+| 장바구니 입력·저장 | `CartClient.interaction.test.tsx`, `CartQuantityControl.interaction.test.tsx` | JSDOM·모의 API. 미저장/잘못된 입력, 저장 중 중복 조작, 응답 유실·잘못된 금액의 주문 차단, 재조회와 키보드 저장 |
+| 결제 재시도·완료 정리 | `CheckoutPaymentRetry.interaction.test.tsx`, `paymentReturnFinalization.test.ts` | JSDOM·모의 API/결제 SDK·메모리 Storage. 서버 확인 대기, 취소/닫기 후 재시도, 대기 중 복구 정보 유지와 비회원 장바구니의 1회 차감 |
+| 대화상자·주소 검색 | `useAccessibleDialog.interaction.test.tsx`, `KakaoPostcodeSearchButton.interaction.test.tsx` | JSDOM·모의 주소 검색. Tab/Escape·중첩 포커스 복구, 취소 후 늦은 결과 무시와 다시 열기 |
+| 상품 카드·메인 더보기 | `ProductServiceCardOptionsTest`, `HomeDiscoveryProductsServiceTest` | Mockito 단위 테스트. 상품 24개의 옵션 조회 1회, 후보 13개 중 카드 12개만 보강, 빈 결과의 추가 조회 생략·호출 범위 확인 |
+
+프론트 6개 파일의 61개 테스트가 통과했고 실패·취소·스킵 0개입니다. 수량 컨트롤 테스트에서 기존 React `act` 경고가 발생했으므로 경고 없는 실행으로 표시하지 않습니다. 백엔드 2개 클래스의 7개 테스트는 실패·오류·스킵 0개입니다. 이 조회 검증은 모의 mapper의 호출과 반환값을 확인하며 실제 SQL 실행계획, 500개 경계의 실행 테스트, MariaDB 통합이나 부하 시험은 포함하지 않습니다. 프론트의 DOM 검증 역시 실제 PG 승인·주소 제공자·실기기 키보드 검증을 대신하지 않습니다.
+
+```powershell
+cd C:\dh\gowoonmom\gowoonmom-web
+npx.cmd tsx --test --test-concurrency=2 src/components/cart/CartClient.interaction.test.tsx src/components/cart/CartQuantityControl.interaction.test.tsx src/components/checkout/CheckoutPaymentRetry.interaction.test.tsx src/lib/checkout/paymentReturnFinalization.test.ts src/components/common/useAccessibleDialog.interaction.test.tsx src/components/address/KakaoPostcodeSearchButton.interaction.test.tsx
+
+cd C:\dh\gowoonmom\gowoonmom
+$env:JAVA_HOME = 'C:/Program Files/Java/jdk-17'
+$env:GOWOONMOM_LOCAL_SECRET_IMPORT = 'optional:file:./portfolio-verification-no-secrets.yml'
+.\gradlew.bat test --tests '*ProductServiceCardOptionsTest' --tests '*HomeDiscoveryProductsServiceTest' --no-daemon
+```
+
+위 Java 경로는 이 작업 PC에 설치된 JDK 17 기준입니다. 비밀 설정 제외 경로는 존재하지 않는 선택적 파일이며 파일을 생성하지 않습니다. 환경변수는 현재 PowerShell 세션에만 적용되므로 필요하면 검증 후 세션을 종료합니다.
+
 ## 로컬 확인
 
 ```powershell
-cd D:\dev\gowoonmom\portfolio-site
+cd C:\dh\gowoonmom\portfolio
+pnpm.cmd install --frozen-lockfile
 npm.cmd run dev
 ```
 
@@ -83,9 +111,10 @@ node --input-type=module -e 'import {createServer} from "vite"; const server = a
 ## 검증
 
 ```powershell
-cd D:\dev\gowoonmom
-node .\portfolio-site\site.test.mjs
-node --test .\portfolio-site\dev-server.test.mjs
+cd C:\dh\gowoonmom\portfolio
+node .\site.test.mjs
+node --test .\dev-server.test.mjs
+npm.cmd run build
 ```
 
 `site.test.mjs`는 다음 내용을 확인합니다.
@@ -107,6 +136,8 @@ node --test .\portfolio-site\dev-server.test.mjs
 `dev-server.test.mjs`는 로컬 서버의 경로 경계, 보안 헤더, GET·HEAD 제한을 확인합니다.
 
 2026-09-27 화면 검증에서는 320·390·768·1280px에서 가로 넘침이 없고, 고운맘 사례의 문제·선택·검증 요약이 데스크톱 3열·모바일 1열로 표시되는 것을 확인했습니다. 회사 장애 사례가 담당 업무보다 먼저 표시되는 순서와 상세 펼치기, 회사·설계 영역의 내부 링크를 확인했으며 브라우저 콘솔 오류·경고는 없었습니다. `site.test.mjs`, `dev-server.test.mjs` 3개 테스트, JavaScript 문법 검사와 `npm.cmd run build`도 통과했습니다. 이 정적 사이트에는 별도 lint/typecheck 명령이 없습니다. 이 날짜의 검증은 포트폴리오 본문과 화면에 한정되며, 위 고운맘 백엔드 검증의 실행 날짜를 갱신하지 않습니다.
+
+2026-10-01에는 구매 흐름 개선 영역을 추가한 현재 포트폴리오에서 `site.test.mjs`, `dev-server.test.mjs` 3개 테스트, JavaScript 문법 검사, `git diff --check`와 `npm.cmd run build`가 통과했습니다. 로컬 개발 화면의 320·390·768·1280px에서 문서 가로 넘침이 없고, 새 영역이 320·390px에서는 1열, 768·1280px에서는 2열임을 확인했습니다. 390px에서 네 사례와 검증 안내의 줄바꿈·화면 표시를 직접 확인했고 브라우저 콘솔 오류·경고는 없었습니다. 내부 링크 대상·공개 PDF·로컬 자산 경로는 기존 정적 검사로 확인했습니다. 별도 lint/typecheck 명령은 없으며 GitHub Pages 게시·운영 배포는 실행하지 않았습니다.
 
 ## 공개 기준
 
