@@ -276,7 +276,6 @@ const requiredCss = [
   ".company-case-summary",
   ".company-case-details > summary",
   ".mail-interference",
-  ".work-summary",
   ".case-brief",
   ".architecture-support",
 ];

@@ -7,6 +7,8 @@
 
 ## 정보 구조
 
+디자인은 흰 배경과 본문 위계, 여백과 얇은 구분선을 중심으로 구성합니다. 첫 화면에는 이름·직무·소개·사례 링크를 두고, 실제 서비스 이미지는 고운맘 소개에 함께 배치합니다. 사례와 경력은 외곽 카드 없이 이어지는 문서 형태로 표시하며, 데이터 흐름과 ERD의 테두리는 관계를 설명할 때만 사용합니다. 고운맘 계열 색상은 링크와 결과 강조에 제한하고, 작은 화면의 메뉴는 줄을 나눠 모두 표시합니다.
+
 첫 화면은 이름·직무·핵심 소개와 실제 공개 고객 화면을 보여주고, 고운맘 기술 사례와 회사 장애 해결 사례로 바로 이동하도록 구성합니다. 프로젝트 정보와 네 가지 기술 사례의 목록은 해당 본문으로 옮겨 첫 화면에서 읽을 양을 줄였습니다. 그 아래 다음 7개 섹션을 구성합니다.
 
 1. 대표 프로젝트: 해결하려는 상태 불일치 문제, 1인 책임 범위와 현재 서비스 상태를 짧게 소개
@@ -17,7 +19,7 @@
 6. 기술 스택: 실제 기술·도구를 여섯 범주로 분류. 상태 머신·lease·스냅샷 등 설계 내용은 AI 사례에서 설명
 7. 연락처: 공개 이력서 PDF·GitHub·이메일·고운맘 서비스 URL
 
-ERD와 문제 해결 사례는 별도 이미지 파일 없이 HTML/CSS로 구성해 화면 크기에 맞게 읽을 수 있습니다. 공개 ERD는 핵심 PK·FK와 상태 컬럼만 표시하고, 정확한 제약조건과 인덱스는 `docs/schema.sql`을 기준으로 관리합니다.
+ERD와 문제 해결 사례는 별도 이미지 파일 없이 HTML/CSS로 구성해 화면 크기에 맞게 읽을 수 있습니다. 공개 ERD는 주문·재고, 결제·환불, 배송·알림의 세 그룹으로 나누고, PK·FK와 스냅샷·수량·상태·재시도 컬럼을 함께 표시합니다. 데스크톱은 첫 그룹을 펼치고, 모바일은 짧은 개요에서 원하는 그룹을 펼칠 수 있도록 시작합니다. 결제 없는 취소의 nullable 결제 참조와 주문상품별 환불 배분도 명시합니다. 주문상품의 최소 개수와 옵션별 재고 생성은 업무 규칙을 포함하며, 정확한 제약조건과 인덱스는 `docs/schema.sql`을 기준으로 관리합니다.
 
 첫 화면의 `assets/gowoonmom-storefront.jpg`는 2026-10-07 공개 고객 화면의 캡처입니다. 계정·주문·관리자 데이터와 고객 개인정보는 포함하지 않으며, 캡처 자체를 최신 운영 배포나 주문 가능 여부의 근거로 사용하지 않습니다. 실제 화면이 변경되면 캡처와 본문의 캡처일을 함께 갱신합니다.
 
@@ -97,7 +99,7 @@ $env:GOWOONMOM_LOCAL_SECRET_IMPORT = 'optional:file:./portfolio-verification-no-
 ## 로컬 확인
 
 ```powershell
-cd C:\dh\gowoonmom\portfolio
+cd D:\dev\gowoonmom\portfolio-site
 pnpm.cmd install --frozen-lockfile
 npm.cmd run dev
 ```
@@ -113,7 +115,7 @@ node --input-type=module -e 'import {createServer} from "vite"; const server = a
 ## 검증
 
 ```powershell
-cd C:\dh\gowoonmom\portfolio
+cd D:\dev\gowoonmom\portfolio-site
 node .\site.test.mjs
 node --test .\dev-server.test.mjs
 npm.cmd run build

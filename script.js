@@ -16,6 +16,14 @@ if (yearNode) {
 }
 
 const navLinks = Array.from(document.querySelectorAll(".top-nav a[href^='#']"));
+
+// Start the mobile ERD with a short overview; native details handle accessibility.
+if (window.matchMedia("(max-width: 680px)").matches) {
+  for (const group of document.querySelectorAll(".erd-group")) {
+    group.open = false;
+  }
+}
+
 const sections = navLinks
   .map((link) => {
     const target = document.querySelector(link.getAttribute("href"));

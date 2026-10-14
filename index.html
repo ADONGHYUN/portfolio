@@ -16,10 +16,8 @@
 
     <header class="site-header">
       <a class="brand" href="#top" aria-label="포트폴리오 첫 화면으로 이동">
-        <span class="brand-mark" aria-hidden="true">LDH</span>
         <span class="brand-copy">
           <strong>임동현</strong>
-          <small>Java / Spring Backend Developer</small>
         </span>
       </a>
       <nav class="top-nav" aria-label="주요 섹션">
@@ -28,7 +26,7 @@
         <a href="#experience">회사 문제 해결</a>
         <a href="#ai-orchestration">AI 검증</a>
         <a href="#data-model">설계·ERD</a>
-        <a href="./assets/lim-donghyun-backend-resume.pdf" target="_blank" rel="noopener noreferrer">PDF <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+        <a href="./assets/lim-donghyun-backend-resume.pdf" target="_blank" rel="noopener noreferrer">이력서 ↗</a>
       </nav>
     </header>
 
@@ -38,20 +36,13 @@
           <div class="system-summary">
             <p class="hero-role">Java·Spring 백엔드 개발자</p>
             <h1 id="hero-title">임동현</h1>
-            <p class="hero-statement">실패를 재현하고,<br />데이터로 해결을 확인합니다.</p>
+            <p class="hero-statement">실패를 재현하고, 데이터로 해결을 확인합니다.</p>
             <p class="hero-lead">1인 커머스 개발과 회사 메일 시스템 운영을 통해<br class="desktop-break" /> 주문·결제·재고의 정합성과 운영 장애를 다뤘습니다.</p>
             <div class="system-actions">
-              <a class="button primary" href="#problem-solving">고운맘 기술 사례</a>
-              <a class="button secondary" href="#mail-incident">회사 장애 해결 사례</a>
+              <a class="button primary" href="#problem-solving">고운맘 기술 사례 <span aria-hidden="true">↗</span></a>
+              <a class="button secondary" href="#mail-incident">회사 장애 해결 사례 <span aria-hidden="true">↗</span></a>
             </div>
           </div>
-          <figure class="service-preview">
-            <a href="https://gowoonmom.kr/" target="_blank" rel="noopener noreferrer" aria-label="고운맘 공개 서비스 보기 (새 창)">
-              <img src="./assets/gowoonmom-storefront.jpg" alt="고운맘 고객 화면: 상품 카테고리와 여성 데일리웨어 소개" width="1170" height="578" fetchpriority="high" />
-            </a>
-            <figcaption><strong>고운맘 · 1인 개발 커머스</strong><a class="text-link" href="https://gowoonmom.kr/" target="_blank" rel="noopener noreferrer">서비스 보기 ↗</a></figcaption>
-            <p>공개 고객 화면 · <time datetime="2026-10-07">2026.10.07</time> 캡처<br />UI 보완 중으로 일반 주문은 아직 불가합니다.</p>
-          </figure>
         </div>
       </section>
 
@@ -66,21 +57,28 @@
             <h3>주문·결제·재고의 최종 상태를 함께 보호합니다.</h3>
             <p>주문은 만료됐는데 결제가 승인되거나, S3 복사는 끝났는데 DB 기록은 실패할 수 있습니다. 각 단계의 완료 기준을 나누고 중복·실패·재시도 후 주문·원장·재고가 어떻게 남아야 하는지 정했습니다.</p>
             <p>요구사항 정의부터 설계·개발·배포·운영 검증까지 직접 맡았습니다. 사업자등록 후 공개 운영 중이며 UI 보완으로 일반 주문은 아직 불가합니다. 아래 사례는 실제 고객 주문 실적이 아닌 개발·테스트 검증 결과입니다.</p>
-            <dl class="system-facts" aria-label="프로젝트 핵심 사실">
-              <div><dt>서비스</dt><dd><a href="https://gowoonmom.kr/" target="_blank" rel="noopener noreferrer">gowoonmom.kr ↗</a></dd></div>
-              <div><dt>개발 기간</dt><dd>2025.12 → 현재</dd></div>
-              <div><dt>담당 범위</dt><dd>1인 전체 개발</dd></div>
-              <div><dt>현재 실무</dt><dd>Java 웹 개발·운영</dd></div>
-            </dl>
-            <dl class="project-facts">
-              <div><dt>정의·설계</dt><dd>고객·운영자 요구사항<br />API·DB·상태 전이</dd></div>
-              <div><dt>개발·검증</dt><dd>백엔드·프론트엔드<br />실패 조건·회귀 테스트</dd></div>
-              <div><dt>배포·운영</dt><dd>AWS 공개 배포<br />관리자·복구 흐름</dd></div>
-            </dl>
-            <p class="scope-note">장바구니 저장 결과가 불확실할 때의 주문 차단, 결제창 취소 후 재시도, 상품 목록의 일괄 조회와 키보드 조작도 함께 보완했습니다. <a class="text-link" href="#recent-improvements">구매 흐름의 최근 개선 보기 ↓</a></p>
-            <p class="scope-note">AI/Codex는 코드 작성·분석·테스트 작성을 폭넓게 보조했습니다. 요구사항과 허용할 상태, 변경의 채택·검토·배포 책임은 개발자인 제가 맡습니다. <a class="text-link" href="#ai-orchestration">활용 범위와 검증 방식 ↓</a></p>
           </div>
+          <figure class="service-preview">
+            <a href="https://gowoonmom.kr/" target="_blank" rel="noopener noreferrer" aria-label="고운맘 공개 서비스 보기 (새 창)">
+              <img src="./assets/gowoonmom-storefront.jpg" alt="고운맘 고객 화면: 상품 카테고리와 여성 데일리웨어 소개" width="1170" height="578" fetchpriority="high" />
+            </a>
+            <figcaption><strong>고운맘 · 1인 개발 커머스</strong><a class="text-link" href="https://gowoonmom.kr/" target="_blank" rel="noopener noreferrer">서비스 보기 ↗</a></figcaption>
+            <p>공개 고객 화면 · <time datetime="2026-10-07">2026.10.07</time> 캡처<br />UI 보완 중으로 일반 주문은 아직 불가합니다.</p>
+          </figure>
         </div>
+        <dl class="system-facts" aria-label="프로젝트 핵심 사실">
+          <div><dt>서비스</dt><dd><a href="https://gowoonmom.kr/" target="_blank" rel="noopener noreferrer">gowoonmom.kr ↗</a></dd></div>
+          <div><dt>개발 기간</dt><dd>2025.12 → 현재</dd></div>
+          <div><dt>담당 범위</dt><dd>1인 전체 개발</dd></div>
+          <div><dt>현재 실무</dt><dd>Java 웹 개발·운영</dd></div>
+        </dl>
+        <dl class="project-facts">
+          <div><dt>정의·설계</dt><dd>고객·운영자 요구사항<br />API·DB·상태 전이</dd></div>
+          <div><dt>개발·검증</dt><dd>백엔드·프론트엔드<br />실패 조건·회귀 테스트</dd></div>
+          <div><dt>배포·운영</dt><dd>AWS 공개 배포<br />관리자·복구 흐름</dd></div>
+        </dl>
+        <p class="scope-note">장바구니 저장 결과가 불확실할 때의 주문 차단, 결제창 취소 후 재시도, 상품 목록의 일괄 조회와 키보드 조작도 함께 보완했습니다. <a class="text-link" href="#recent-improvements">구매 흐름의 최근 개선 보기 ↓</a></p>
+        <p class="scope-note">AI/Codex는 코드 작성·분석·테스트 작성을 폭넓게 보조했습니다. 요구사항과 허용할 상태, 변경의 채택·검토·배포 책임은 개발자인 제가 맡습니다. <a class="text-link" href="#ai-orchestration">활용 범위와 검증 방식 ↓</a></p>
       </section>
 
       <section id="problem-solving" class="section-band problem-section" aria-labelledby="problem-title">
@@ -466,7 +464,7 @@
                 <span class="erd-kicker">DOMAIN MAP</span>
                 <h3>업무 수명주기에 따라 데이터 경계를 분리했습니다.</h3>
               </div>
-              <span class="erd-source">2026.09.19 · 데이터 모델 기준</span>
+              <span class="erd-source"><time datetime="2026-10-14">2026.10.14</time> · 데이터 모델 기준</span>
             </div>
             <div class="erd-domain-map" aria-label="회원과 인증, 상품과 재고, 장바구니와 주문, 결제와 환불, 배송과 알림, 이미지 자산 도메인 관계">
               <div><small>01</small><strong>회원 · 인증</strong><span>사용자·세션·동의·OAuth</span></div>
@@ -504,57 +502,180 @@
               <h3 id="commerce-erd-title">주문·결제·재고·배송의 핵심 관계</h3>
             </div>
             <div class="erd-legend" aria-label="관계 표기 범례">
-              <span><b>1</b> 하나</span>
+              <span><b>1</b> 필수 하나</span>
               <span><b>0..1</b> 선택적 하나</span>
-              <span><b>N</b> 여러 개</span>
+              <span><b>0..N</b> 없거나 여러 개</span>
+              <span><b>1..N</b> 하나 이상</span>
             </div>
           </div>
+          <p class="erd-reading-guide">각 그룹에서 관계와 핵심 컬럼을 함께 볼 수 있습니다. 한글 이름은 데이터의 역할, 영문 이름은 실제 테이블·컬럼입니다.</p>
 
           <div class="erd-lanes">
-            <div class="erd-lane">
-              <div class="erd-entity"><small>회원</small><strong>user_account</strong><span>PK user_id</span></div>
-              <div class="erd-relation"><span>0..1</span><i></i><span>0..N</span></div>
-              <div class="erd-entity anchor"><small>주문 헤더</small><strong>sales_order</strong><span>PK order_id · nullable FK user_id</span></div>
-              <div class="erd-relation"><span>1</span><i></i><span>1..N</span></div>
-              <div class="erd-entity"><small>주문 스냅샷</small><strong>sales_order_item</strong><span>FK order_id · option_id</span></div>
-              <div class="erd-relation"><span>N</span><i></i><span>1</span></div>
-              <div class="erd-entity"><small>옵션 마스터</small><strong>product_option</strong><span>PK option_id · master version</span></div>
-              <div class="erd-relation"><span>1</span><i></i><span>1</span></div>
-              <div class="erd-entity"><small>실시간 재고</small><strong>inventory_option_balance</strong><span>PK/FK option_id · inventory version</span></div>
-            </div>
+            <details id="erd-orders" class="erd-group" open>
+              <summary>
+                <span class="erd-group-heading"><strong>주문·재고</strong><span>주문 당시 정보와 실시간 재고의 변경 범위를 분리합니다.</span></span>
+                <span class="erd-group-toggle"><span class="erd-open-copy">관계·컬럼 보기</span><span class="erd-close-copy">접기</span><i aria-hidden="true"></i></span>
+              </summary>
+              <div class="erd-group-body">
+                <div class="erd-row">
+                  <div class="erd-entity">
+                    <h4>회원</h4><code>user_account</code>
+                    <p class="erd-key">PK user_id</p>
+                    <p class="erd-entity-note">회원 주문을 연결합니다. 비회원 주문과 회원 참조가 해제된 주문도 보존합니다.</p>
+                  </div>
+                  <div class="erd-relation" role="img" aria-label="주문 한 건은 회원 0명 또는 1명에 연결되고, 회원 한 명은 주문 0건 이상을 가집니다."><span>0..1</span><i aria-hidden="true"></i><span>0..N</span></div>
+                  <div class="erd-entity anchor">
+                    <h4>주문</h4><code>sales_order</code>
+                    <p class="erd-key">PK order_id<br />FK user_id · 선택</p>
+                    <dl class="erd-fields">
+                      <div><dt>배송비 정책 버전</dt><dd><code>shipping_policy_version</code></dd></div>
+                    </dl>
+                    <p class="erd-entity-note">주문 준비 시 적용한 배송비 기준을 남깁니다.</p>
+                  </div>
+                  <div class="erd-relation" role="img" aria-label="주문 한 건에 주문상품이 하나 이상 기록되고, 주문상품은 주문 한 건에 속합니다."><span>1</span><i aria-hidden="true"></i><span>1..N</span></div>
+                  <div class="erd-entity">
+                    <h4>주문상품 스냅샷</h4><code>sales_order_item</code>
+                    <p class="erd-key">PK order_item_id<br />FK order_id · option_id</p>
+                    <dl class="erd-fields">
+                      <div><dt>당시 상품명</dt><dd><code>product_name_snapshot</code></dd></div>
+                      <div><dt>당시 단가</dt><dd><code>unit_price_snapshot</code></dd></div>
+                      <div><dt>주문 수량</dt><dd><code>quantity</code></dd></div>
+                    </dl>
+                  </div>
+                </div>
+                <div class="erd-row erd-row--pair">
+                  <div class="erd-entity">
+                    <h4>옵션 마스터</h4><code>product_option</code>
+                    <p class="erd-key">PK option_id</p>
+                    <dl class="erd-fields"><div><dt>상품 편집 버전</dt><dd><code>version</code></dd></div></dl>
+                  </div>
+                  <div class="erd-relation" role="img" aria-label="옵션 생성 시 옵션마다 재고 한 행을 함께 생성합니다."><span>1</span><i aria-hidden="true"></i><span>1</span></div>
+                  <div class="erd-entity">
+                    <h4>실시간 재고</h4><code>inventory_option_balance</code>
+                    <p class="erd-key">PK / FK option_id</p>
+                    <dl class="erd-fields">
+                      <div><dt>실물 수량</dt><dd><code>stock_quantity</code></dd></div>
+                      <div><dt>예약 수량</dt><dd><code>reserved_quantity</code></dd></div>
+                      <div><dt>판매보류 수량</dt><dd><code>sales_hold_quantity</code></dd></div>
+                      <div><dt>재고 변경 버전</dt><dd><code>version</code></dd></div>
+                    </dl>
+                  </div>
+                </div>
+                <ul class="erd-cross-relations">
+                  <li><strong>주문상품 0..N ↔ 옵션 1</strong><span><code>sales_order_item.option_id</code>로 실제 판매 옵션을 참조하면서 당시 상품명과 단가는 별도로 보존합니다.</span></li>
+                </ul>
+                <p class="erd-group-insight"><strong>보호하는 기준</strong>가용 재고는 실물 − 예약 − 판매보류로 계산합니다. 상품 편집과 재고 변경의 버전을 나눠, 오래된 상품 수정이 최신 재고를 덮어쓰지 않도록 합니다.</p>
+              </div>
+            </details>
 
-            <div class="erd-lane payment-lane">
-              <div class="erd-entity anchor"><small>주문 헤더</small><strong>sales_order</strong><span>PK order_id</span></div>
-              <div class="erd-relation"><span>1</span><i></i><span>0..N</span></div>
-              <div class="erd-entity payment"><small>결제 원장</small><strong>payment</strong><span>FK order_id · 결제 상태</span></div>
-              <div class="erd-relation"><span>1</span><i></i><span>0..N</span></div>
-              <div class="erd-entity"><small>취소·환불 요청</small><strong>payment_cancellation</strong><span>FK order_id · payment_id</span></div>
-              <div class="erd-relation"><span>1</span><i></i><span>0..N</span></div>
-              <div class="erd-entity"><small>부분환불 배분</small><strong>payment_cancellation_item</strong><span>FK cancellation_id · order_item_id</span></div>
-            </div>
+            <details id="erd-payments" class="erd-group">
+              <summary>
+                <span class="erd-group-heading"><strong>결제·환불</strong><span>결제 관측, 확정 원장, 개별 취소 요청을 구분합니다.</span></span>
+                <span class="erd-group-toggle"><span class="erd-open-copy">관계·컬럼 보기</span><span class="erd-close-copy">접기</span><i aria-hidden="true"></i></span>
+              </summary>
+              <div class="erd-group-body">
+                <div class="erd-row erd-row--pair">
+                  <div class="erd-entity anchor">
+                    <h4>주문</h4><code>sales_order</code>
+                    <p class="erd-key">PK order_id</p>
+                    <p class="erd-entity-note">결제 관측과 원장을 같은 주문에 연결합니다.</p>
+                  </div>
+                  <div class="erd-relation" role="img" aria-label="주문 한 건에는 결제 관측이 최대 한 건 연결됩니다."><span>1</span><i aria-hidden="true"></i><span>0..1</span></div>
+                  <div class="erd-entity">
+                    <h4>결제 관측·계약</h4><code>payment_attempt</code>
+                    <p class="erd-key">PK payment_id<br />UNIQUE / FK order_id</p>
+                    <dl class="erd-fields">
+                      <div><dt>서버 기준 결제금액</dt><dd><code>expected_amount</code></dd></div>
+                      <div><dt>관측·복구 상태</dt><dd><code>status</code></dd></div>
+                      <div><dt>보상 취소 참조 · 선택</dt><dd><code>recovery_cancellation_id</code></dd></div>
+                    </dl>
+                  </div>
+                </div>
+                <div class="erd-row">
+                  <div class="erd-entity">
+                    <h4>확정 결제 원장</h4><code>payment</code>
+                    <p class="erd-key">PK payment_id<br />FK order_id</p>
+                    <dl class="erd-fields">
+                      <div><dt>결제 상태</dt><dd><code>payment_status</code></dd></div>
+                      <div><dt>승인 금액</dt><dd><code>approved_amount</code></dd></div>
+                      <div><dt>누적 취소 금액</dt><dd><code>cancelled_amount</code></dd></div>
+                    </dl>
+                  </div>
+                  <div class="erd-relation" role="img" aria-label="취소 요청은 결제 원장 0건 또는 1건을 참조하고, 결제 원장 한 건에는 취소 요청이 0건 이상 연결됩니다."><span>0..1</span><i aria-hidden="true"></i><span>0..N</span></div>
+                  <div class="erd-entity">
+                    <h4>취소·환불 요청</h4><code>payment_cancellation</code>
+                    <p class="erd-key">PK cancellation_id<br />FK order_id<br />FK payment_id · 선택</p>
+                    <dl class="erd-fields">
+                      <div><dt>요청 처리 상태</dt><dd><code>status</code></dd></div>
+                      <div><dt>현금 환불 금액</dt><dd><code>cash_refund_amount</code></dd></div>
+                    </dl>
+                  </div>
+                  <div class="erd-relation" role="img" aria-label="취소 요청 한 건은 환불 배분 항목을 0개 이상 가지고, 배분 항목은 취소 요청 한 건에 속합니다."><span>1</span><i aria-hidden="true"></i><span>0..N</span></div>
+                  <div class="erd-entity">
+                    <h4>주문상품별 환불 배분</h4><code>payment_cancellation_item</code>
+                    <p class="erd-key">FK cancellation_id<br />FK order_item_id</p>
+                    <p class="erd-entity-note">어떤 주문상품이 취소·환불 대상인지 개별 요청에 연결합니다.</p>
+                  </div>
+                </div>
+                <ul class="erd-cross-relations">
+                  <li><strong>주문 1 ↔ 결제 원장 0..N · 취소 요청 0..N</strong><span>두 테이블 모두 <code>order_id</code>로 주문을 직접 참조합니다. 결제 원장 없이 예약을 해제하는 취소 요청도 기록합니다.</span></li>
+                  <li><strong>주문상품 1 ↔ 환불 배분 0..N</strong><span><code>order_item_id</code>로 환불 대상을 원래 주문상품에 연결합니다.</span></li>
+                  <li><strong>결제 관측 0..1 ↔ 보상 취소 0..1</strong><span>늦은 승인 보상환불은 선택적·고유 참조인 <code>recovery_cancellation_id</code>로 연결합니다.</span></li>
+                </ul>
+                <p class="erd-group-insight"><strong>보호하는 기준</strong>PG 상태의 관측과 확정 원장을 구분하고, 만료 주문의 늦은 승인은 보상 취소로 추적합니다. 결제 관측과 원장은 같은 결제 식별자를 사용하며, 두 테이블 간 직접 FK는 두지 않았습니다.</p>
+              </div>
+            </details>
 
-            <div class="erd-lane compact final">
-              <div class="erd-entity anchor"><small>주문 헤더</small><strong>sales_order</strong><span>PK order_id</span></div>
-              <div class="erd-relation"><span>1</span><i></i><span>0..1</span></div>
-              <div class="erd-entity"><small>결제 관측</small><strong>payment_attempt</strong><span>UNIQUE order_id · 복구 상태</span></div>
-              <p>주문마다 하나의 결제 시도만 두고, 지연 승인·보상 환불·수동 검토 상태를 별도로 관측합니다.</p>
-            </div>
-
-            <div class="erd-lane compact">
-              <div class="erd-entity anchor"><small>주문 헤더</small><strong>sales_order</strong><span>PK order_id</span></div>
-              <div class="erd-relation"><span>1</span><i></i><span>0..1</span></div>
-              <div class="erd-entity"><small>현재 배송</small><strong>shipment</strong><span>UNIQUE order_id · 운송장</span></div>
-              <div class="erd-relation"><span>1</span><i></i><span>0..N</span></div>
-              <div class="erd-entity"><small>배송 감사 이력</small><strong>shipment_history</strong><span>FK shipment_id · order_id</span></div>
-            </div>
-
-            <div class="erd-lane compact final">
-              <div class="erd-entity anchor"><small>주문 헤더</small><strong>sales_order</strong><span>PK order_id</span></div>
-              <div class="erd-relation"><span>1</span><i></i><span>0..N</span></div>
-              <div class="erd-entity"><small>고객 알림 작업</small><strong>notification_outbox</strong><span>FK order_id · 상태·재시도</span></div>
-              <p>외부 알림은 주문 트랜잭션과 분리합니다. 일시 실패는 재시도하고, 발송 결과가 불확실하면 별도로 보류해 중복 발송 위험을 관리합니다.</p>
-            </div>
+            <details id="erd-delivery" class="erd-group">
+              <summary>
+                <span class="erd-group-heading"><strong>배송·알림</strong><span>현재 배송과 감사 이력, 외부 발송 작업의 수명을 나눕니다.</span></span>
+                <span class="erd-group-toggle"><span class="erd-open-copy">관계·컬럼 보기</span><span class="erd-close-copy">접기</span><i aria-hidden="true"></i></span>
+              </summary>
+              <div class="erd-group-body">
+                <div class="erd-row">
+                  <div class="erd-entity anchor">
+                    <h4>주문</h4><code>sales_order</code>
+                    <p class="erd-key">PK order_id</p>
+                    <p class="erd-entity-note">배송과 외부 알림 작업을 주문에 연결합니다.</p>
+                  </div>
+                  <div class="erd-relation" role="img" aria-label="주문 한 건에는 현재 배송이 최대 한 건 연결됩니다."><span>1</span><i aria-hidden="true"></i><span>0..1</span></div>
+                  <div class="erd-entity">
+                    <h4>현재 배송</h4><code>shipment</code>
+                    <p class="erd-key">PK shipment_id<br />UNIQUE / FK order_id</p>
+                    <p class="erd-entity-note">한 주문의 현재 배송 정보를 한 행으로 관리합니다.</p>
+                  </div>
+                  <div class="erd-relation" role="img" aria-label="배송 한 건에는 배송 감사 이력이 0건 이상 연결됩니다."><span>1</span><i aria-hidden="true"></i><span>0..N</span></div>
+                  <div class="erd-entity">
+                    <h4>배송 감사 이력</h4><code>shipment_history</code>
+                    <p class="erd-key">FK shipment_id · order_id</p>
+                    <p class="erd-entity-note">현재 배송 정보와 별도로 변경 이력을 보존합니다.</p>
+                  </div>
+                </div>
+                <div class="erd-row erd-row--pair">
+                  <div class="erd-entity anchor">
+                    <h4>주문</h4><code>sales_order</code>
+                    <p class="erd-key">PK order_id</p>
+                  </div>
+                  <div class="erd-relation" role="img" aria-label="주문 한 건에는 고객 알림 작업이 0건 이상 연결됩니다."><span>1</span><i aria-hidden="true"></i><span>0..N</span></div>
+                  <div class="erd-entity">
+                    <h4>고객 알림 작업</h4><code>notification_outbox</code>
+                    <p class="erd-key">FK order_id</p>
+                    <dl class="erd-fields">
+                      <div><dt>발송 상태</dt><dd><code>status</code></dd></div>
+                      <div><dt>발송 시도 횟수</dt><dd><code>attempt_count</code></dd></div>
+                      <div><dt>예약·재시도 시각</dt><dd><code>scheduled_at</code></dd></div>
+                      <div><dt>작업 선점 만료</dt><dd><code>claim_expires_at</code></dd></div>
+                    </dl>
+                  </div>
+                </div>
+                <ul class="erd-cross-relations">
+                  <li><strong>주문 1 ↔ 배송 감사 이력 0..N</strong><span>배송 이력도 <code>order_id</code>로 주문을 직접 참조합니다.</span></li>
+                </ul>
+                <p class="erd-group-insight"><strong>보호하는 기준</strong>알림 작업을 주문 트랜잭션에 기록하고 외부 발송은 분리합니다. 미접수가 확인된 재시도 가능 실패는 다시 처리하고, 타임아웃 등 결과가 불확실한 발송은 별도 상태로 보류해 중복 발송 위험을 관리합니다.</p>
+              </div>
+            </details>
           </div>
+          <p class="erd-model-note">주문상품의 1..N과 옵션별 재고의 1:1은 생성 시 지키는 업무 규칙을 포함합니다. 전체 스키마에서 핵심 관계와 대표 컬럼만 추렸으며, 실제 회원·주문 데이터는 표시하지 않습니다.</p>
         </article>
 
         <div class="erd-notes">
@@ -626,7 +747,7 @@
 
     <footer class="site-footer">
       <span>© <span id="current-year">2026</span> 임동현</span>
-      <span>포트폴리오 갱신 <time datetime="2026-10-07">2026.10.07</time> · 회사 내부 식별정보 비공개</span>
+      <span>포트폴리오 갱신 <time datetime="2026-10-14">2026.10.14</time> · 회사 내부 식별정보 비공개</span>
     </footer>
 
     <script type="module" src="./script.js"></script>
