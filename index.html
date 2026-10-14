@@ -36,11 +36,12 @@
           <div class="system-summary">
             <p class="hero-role">Java·Spring 백엔드 개발자</p>
             <h1 id="hero-title">임동현</h1>
-            <p class="hero-statement">실패를 재현하고, 데이터로 해결을 확인합니다.</p>
-            <p class="hero-lead">1인 커머스 개발과 회사 메일 시스템 운영을 통해<br class="desktop-break" /> 주문·결제·재고의 정합성과 운영 장애를 다뤘습니다.</p>
+            <p class="hero-statement">개발부터 운영 서버 배포·장애 대응까지 책임집니다.</p>
+            <p class="hero-lead">공공기관 메일 시스템의 요구사항 분석·기능 개발부터 운영 서버 배포와 오류 대응까지 단독으로 맡고 있습니다. 고운맘은 DB·API 설계부터 백엔드·고객/관리자 화면, 테스트와 AWS 배포까지 1인으로 진행했습니다.</p>
             <div class="system-actions">
               <a class="button primary" href="#problem-solving">고운맘 기술 사례 <span aria-hidden="true">↗</span></a>
               <a class="button secondary" href="#mail-incident">회사 장애 해결 사례 <span aria-hidden="true">↗</span></a>
+              <a class="button secondary" href="./assets/lim-donghyun-backend-resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="이력서 PDF 보기 (2쪽, 새 창)">이력서 PDF · 2쪽 <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </div>
@@ -50,7 +51,7 @@
         <div class="project-heading"><div>
           <p class="eyebrow">대표 프로젝트 · 2025.12 — 현재</p>
           <h2 id="project-title">고운맘</h2>
-          <p class="project-lead">주문·결제·재고가 서로 다른 시점에 바뀌는 문제를 다룬 1인 개발 커머스입니다.</p>
+          <p class="project-lead">상품·주문·결제와 관리자 운영을 연결하고, 중복 요청·부분 실패의 복구 흐름을 설계한 1인 커머스입니다.</p>
         </div><div class="project-status"><span>1인 개발</span><span>사업자등록 완료</span></div></div>
         <div class="project-overview">
           <div class="project-copy">
@@ -69,8 +70,8 @@
         <dl class="system-facts" aria-label="프로젝트 핵심 사실">
           <div><dt>서비스</dt><dd><a href="https://gowoonmom.kr/" target="_blank" rel="noopener noreferrer">gowoonmom.kr ↗</a></dd></div>
           <div><dt>개발 기간</dt><dd>2025.12 → 현재</dd></div>
-          <div><dt>담당 범위</dt><dd>1인 전체 개발</dd></div>
-          <div><dt>현재 실무</dt><dd>Java 웹 개발·운영</dd></div>
+          <div><dt>담당 범위</dt><dd>설계·개발·테스트·배포</dd></div>
+          <div><dt>핵심 스택</dt><dd>Spring Boot · Next.js</dd></div>
         </dl>
         <dl class="project-facts">
           <div><dt>정의·설계</dt><dd>고객·운영자 요구사항<br />API·DB·상태 전이</dd></div>
@@ -161,6 +162,26 @@
               <div><dt>선택</dt><dd>PG 재조회 후 주문·결제 상태를 잠금 안에서 확인하고 한 번만 반영</dd></div>
               <div><dt>검증</dt><dd>H2·PG 모의 서버: 중복 승인에도 원장·알림·재고 이력 각 1건</dd></div>
             </dl>
+            <section class="case-screen-evidence" aria-labelledby="payment-screens-title">
+              <h4 id="payment-screens-title">관리자 화면에서 확인하는 주문·환불 상태</h4>
+              <p>백엔드의 상태 구분을 관리자가 판단할 수 있도록 화면에도 연결했습니다.</p>
+              <div class="case-screen-grid">
+                <figure>
+                  <a class="case-screen-link case-screen-link--order" href="./assets/admin-order-state.jpg" target="_blank" rel="noopener noreferrer" aria-label="주문 상태 화면 원본 크기로 보기, 새 탭">
+                    <img src="./assets/admin-order-state.jpg" width="403" height="166" loading="lazy" decoding="async" alt="관리자 주문 목록에서 주문은 부분환불, 배송은 배송 준비, 결제는 부분 결제취소로 각각 표시한 화면">
+                    <span>원본 크기로 보기 ↗</span>
+                  </a>
+                  <figcaption><strong>주문·배송·결제 상태를 따로 표시</strong><span>주문의 부분환불 상태와 배송 진행 상태를 함께 확인합니다. 주문번호·수령인·연락처 영역은 캡처에서 제외했습니다.</span><small>로컬 관리자 주문 목록 · 2026.10.14 캡처</small></figcaption>
+                </figure>
+                <figure>
+                  <a class="case-screen-link case-screen-link--refund" href="./assets/admin-refund-allocation.jpg" target="_blank" rel="noopener noreferrer" aria-label="환불 품목 배분 화면 원본 크기로 보기, 새 탭">
+                    <img src="./assets/admin-refund-allocation.jpg" width="512" height="952" loading="lazy" decoding="async" alt="테스트 주문의 부분취소 금액 30,000원을 가디건 1개에 배분하고, 선택 합계가 미배분액과 일치하는지 표시한 실제 환불 품목 배분 화면">
+                    <span>원본 크기로 보기 ↗</span>
+                  </a>
+                  <figcaption><strong>취소 금액과 환불 품목 배분을 구분</strong><span>미배분액과 선택한 품목의 금액을 비교해 저장 전 확인합니다. 실제 구현 컴포넌트에 테스트 데이터를 사용한 화면이며, 실제 고객 환불 내역은 아닙니다.</span><small>실제 구현 컴포넌트 · 테스트 데이터 · 2026.10.14 캡처</small></figcaption>
+                </figure>
+              </div>
+            </section>
             <details class="case-details">
               <summary>결제 처리 설계·검증 과정</summary>
               <div class="case-summary">
@@ -307,8 +328,7 @@
             <div class="company-case-body">
               <section class="company-case-context" aria-labelledby="mail-handoff-title">
                 <h4 id="mail-handoff-title">배포 인수 범위</h4>
-                <p>IE → Whale 전환으로 포털·메일·보고서 등 연계 시스템을 함께 배포해야 했습니다. 메일 담당자가 운영 배포 1개월 전 퇴사하면서, 보고서 시스템 부담당자였던 제가 메일 배포를 인수했습니다.</p>
-                <p>최초 배포는 전환 코드를 직접 개발한 것이 아니라 전달받은 파일·설정 목록에 따라 수행했습니다. 이후 메일 운영 장애 대응과 유지보수를 계속 맡았습니다. 배포 목록의 파일 누락과 아래 첨부파일 삭제 오류는 별개의 문제였습니다.</p>
+                <p>IE → Whale 전환 사업에서 메일 담당자가 퇴사해, 운영 배포 1개월 전 메일 배포 업무를 인수했습니다. 전달받은 파일·설정 목록에 따라 수행한 메일 배포와 이후 기능 개발·유지보수·운영 오류 대응이 제가 맡은 범위입니다.</p>
                 <p>사업건 운영 배포는 금요일 새벽부터 토요일 점심까지 진행했습니다. 다음 주 화요일에 첨부파일 삭제 오류의 원인을 파악하고, 당일 저녁 수정 사항을 운영에 반영했습니다.</p>
               </section>
 
@@ -348,20 +368,20 @@
             <header>
               <div>
                 <p class="experience-kicker">엔소프트웨어 · 2025.07.01 - 재직 중</p>
-                <h3>배포 한 달 전 비게 된 메일 담당 업무를 인수</h3>
+                <h3>배포 한 달 전 인수한 메일을 단독 운영</h3>
               </div>
               <span class="experience-badge">1인 담당</span>
             </header>
             <p class="experience-summary">
-              담당자 퇴사로 운영 배포를 인수해야 했습니다. 보고서 시스템 부담당자에서 메일 배포를 인수한 뒤, 전달받은 파일·설정 목록으로 배포하고 운영 장애 대응과 유지보수를 계속 맡았습니다.
+              메일 배포를 인수한 뒤 전달받은 파일·설정 목록으로 배포하고, 고객사의 기능 개선 요청과 운영 오류에 대응했습니다.
             </p>
             <ul>
               <li>고객사 요구사항 분석, 기존 기능 유지보수와 신규 기능 개발</li>
               <li>타 시스템 연계 API 개발 및 유지보수</li>
-              <li>메일 시스템 운영 배포와 오류 원인 분석·로직 수정</li>
+              <li>메일 시스템 운영 서버 배포와 오류 원인 분석·로직 수정</li>
             </ul>
-            <p class="experience-proof"><strong>담당 범위</strong> 사내 메일 시스템 개발·운영의 1인 담당자로 업무를 이어갔습니다. 메일 배포 인수와 후속 운영이 제가 맡은 범위입니다.</p>
-            <p class="tag-list" aria-label="사내 메일 시스템 기술 스택">
+            <p class="experience-proof"><strong>담당 범위</strong> 공공기관 메일 시스템 개발·운영을 단독 담당합니다. 요구사항 분석부터 기능 개발, 운영 서버 배포와 오류 대응까지 맡았습니다.</p>
+            <p class="tag-list" aria-label="공공기관 메일 시스템 기술 스택">
               <span>Java</span><span>Spring Legacy</span><span>JSP</span><span>Oracle DB</span><span>연계 API</span>
             </p>
             <a class="text-link experience-case-link" href="#mail-incident">행정우편 장애 해결 사례 ↑</a>
@@ -371,17 +391,18 @@
             <header>
               <div>
                 <p class="experience-kicker">엔소프트웨어 · 인사·노무 개선 사업</p>
-                <h3>연가 부여·평정 문서 제공 요구사항 구현</h3>
+                <h3>인사·노무 기능 개발과 입력 오류 안내</h3>
               </div>
               <span class="experience-badge secondary">3인 팀</span>
             </header>
             <p class="experience-summary">
-              메일 시스템을 단독 운영하면서 인사·노무 개선 사업의 기능 개발을 병행했습니다. 팀장 1명·사원 개발자 2명의 3인 팀에서 연가 부여와 근무성적평정 문서 다운로드 요구사항을 구현했습니다.
+              메일 시스템을 단독 운영하면서 인사·노무 개선 사업의 기능 개발을 병행했습니다. 팀장 1명·사원 개발자 2명의 3인 팀에서 연가 부여, 근무성적평정 PDF 생성과 급여명세서 업로드 오류 안내를 구현했습니다.
             </p>
             <p class="experience-proof"><strong>전체 10개 과업 중</strong> 5개 과업을 개별 담당해 완료하고, 1개 과업을 공동 완료했습니다.</p>
             <ul>
               <li>1년 미만 대상자에게 연가를 1일씩 부여하는 스케줄러 추가</li>
-              <li>OZ Report 기반 근무성적평정 PDF 다운로드 기능 추가</li>
+              <li>OZ Report 기반 근무성적평정 PDF 생성 기능 구현</li>
+              <li>급여명세서 엑셀 업로드 시 양식의 잘못된 부분을 상세 오류 메시지로 안내하도록 개선</li>
             </ul>
             <p class="tag-list" aria-label="인사 노무 시스템 기술 스택">
               <span>Java</span><span>Spring Legacy</span><span>JSP</span><span>Oracle DB</span><span>Scheduler</span><span>OZ Report</span>
@@ -396,7 +417,7 @@
             <p class="experience-kicker">감프정보기술 · 2024.11.25 - 2025.05.23</p>
             <h3>제약 생산관리 시스템 유지보수·QA 지원</h3>
           </div>
-          <p>MES·WMS·Smart EBR의 C#/.NET WinForms 화면 수정, SQL Server 데이터 검증, 단위 테스트와 사용자 지침서 작성을 담당했습니다.</p>
+          <p>MES·WMS·Smart EBR의 제조지시·포장지시 기능 검증, 결함 확인과 사용자 지침서 작성을 담당했습니다. SQL Server 데이터 조회·검증과 C#/.NET WinForms 화면 수정·기능 개선을 지원했습니다.</p>
         </article>
 
         <p class="disclosure-note">
@@ -407,7 +428,7 @@
       <section id="ai-orchestration" class="section-band orchestration-section" aria-labelledby="orchestration-title">
         <div class="section-heading">
           <h2 id="orchestration-title">AI 활용과 검증</h2>
-          <p>생성 결과, 실제 명령 검증, 사람의 승인과 원본 반영을 별도 단계로 나눴습니다.</p>
+          <p>AI가 만든 변경을 격리된 작업 공간에서 테스트하고, 검토·승인 후 반영하는 개발 도구를 구현했습니다.</p>
         </div>
         <div class="implementation-results">
           <article><h3>완료 응답과 실제 성공은 다릅니다.</h3><p>모델이 작업을 끝냈다고 답해도 검증 성공으로 간주하지 않습니다. 실행기가 실제 명령을 수행하고 코드 변경 내용과 검증 결과를 검토 대상으로 남깁니다.</p><span>AI 응답과 실행 결과 분리</span></article>
@@ -417,9 +438,8 @@
         <div class="orchestration-panel">
           <h3>AI 보조와 사람의 책임을 분리했습니다.</h3>
           <div class="orchestration-decisions">
-            <article><h3>AI가 보조한 작업</h3><p>요구사항 정리, 구현 초안, 코드 탐색, 테스트 작성과 리뷰에 폭넓게 활용했습니다. 생성된 코드를 그대로 성과로 삼지 않고 서비스의 규칙·계약에 맞는지 확인합니다.</p></article>
-            <article><h3>개발자가 판단할 부분</h3><p>결제 완료의 기준, 재고 변경 조건, 자동 복구와 수동 검토의 경계처럼 업무 규칙을 확정하고 변경을 채택합니다. 결과에 대한 설명과 운영 책임은 제가 맡습니다.</p></article>
-            <article><h3>결과를 검증하는 방식</h3><p>모델의 “완료” 응답 대신 코드 변경 내용과 실제 테스트 결과를 확인합니다. 정상 동작뿐 아니라 중복 요청·실패·재실행 상황을 검증하고, 테스트 환경에서 확인한 범위를 운영 환경의 성과로 확대하지 않습니다.</p></article>
+            <article><h3>AI가 보조한 작업</h3><p>AI/Codex를 요구사항 정리, 구현, 코드 탐색, 테스트 작성과 리뷰에 폭넓게 활용했습니다.</p></article>
+            <article><h3>직접 판단하고 책임진 부분</h3><p>결제 완료 기준, 재고 변경 조건, 자동 복구와 수동 검토의 경계를 결정하고 변경의 채택·검증·배포를 책임집니다.</p></article>
           </div>
           <details class="case-evidence">
             <summary>직접 구현한 AI 개발 오케스트레이션</summary>
@@ -704,22 +724,22 @@
       <section id="stack" class="section-band stack-section" aria-labelledby="stack-title">
         <div class="section-heading">
           <h2 id="stack-title">기술 스택</h2>
-          <p>회사 실무와 현재 코드·설정에서 확인되는 기술만 역할별로 정리했습니다.</p>
+          <p>기술을 사용한 환경을 함께 표시했습니다. 회사에서는 기존 업무 시스템을, 고운맘에서는 서비스 전체를 설계·개발했습니다.</p>
         </div>
         <div class="stack-grid">
-          <article><h3>Backend</h3><p>Java 17 · Spring Boot 3 · Spring Security · Spring Data JPA · MyBatis · Spring Legacy</p></article>
-          <article><h3>Frontend</h3><p>Next.js 16 · React 19 · TypeScript 5 · Tailwind CSS · Zustand · JSP</p></article>
-          <article><h3>Database / Infra</h3><p>MariaDB · Oracle DB · AWS Lightsail · S3 · CloudFront · Docker Compose · Nginx</p></article>
-          <article><h3>Test / QA</h3><p>JUnit 5 · MockMvc · H2 · Testing Library · Playwright · ESLint</p></article>
-          <article><h3>Integration / Auth</h3><p>PortOne · OAuth · JWT · AWS SDK for Java · OZ Report</p></article>
-          <article><h3>AI Development</h3><p>Codex · Codex App Server · Node.js</p><a class="text-link" href="#ai-orchestration">개발 오케스트레이션·검증 구조 ↑</a></article>
+          <article><h3>Backend</h3><p>Java 17 · Spring Boot 3 · Spring Security · Spring Data JPA · MyBatis · Spring Legacy</p><p class="stack-context">실무: Java·Spring Legacy / 고운맘: Spring Boot·Security·JPA·MyBatis</p></article>
+          <article><h3>Frontend</h3><p>Next.js 16 · React 19 · TypeScript 5 · Tailwind CSS · Zustand · JSP</p><p class="stack-context">실무: JSP / 고운맘: Next.js·React·TypeScript</p></article>
+          <article><h3>Database / Infra</h3><p>MariaDB · Oracle DB · SQL Server · AWS Lightsail · S3 · CloudFront · Docker Compose · Nginx</p><p class="stack-context">실무: Oracle·SQL Server / 고운맘: MariaDB·AWS 배포</p></article>
+          <article><h3>Test / QA</h3><p>JUnit 5 · MockMvc · H2 · Testing Library · Playwright · ESLint</p><p class="stack-context">고운맘: 자동화 테스트 / 감프정보기술: 기능 검증·사용자 문서</p></article>
+          <article><h3>Integration / Auth</h3><p>PortOne · OAuth · JWT · AWS SDK for Java · OZ Report</p><p class="stack-context">실무: OZ Report·업무 연계 API / 고운맘: 결제·인증·이미지 연계</p></article>
+          <article><h3>AI Development</h3><p>Codex · Codex App Server · Node.js</p><p class="stack-context">고운맘 개발 도구: 로컬 PC 실행·소유자 승인</p><a class="text-link" href="#ai-orchestration">개발 오케스트레이션·검증 구조 ↑</a></article>
         </div>
       </section>
 
       <section id="contact" class="section-band contact-section" aria-labelledby="contact-title">
         <div class="section-heading">
           <h2 id="contact-title">이력서와 연락처</h2>
-          <p>전화번호와 주소를 제외한 공개용 이력서와 GitHub, 연락처입니다.</p>
+          <p>경력과 대표 프로젝트를 정리한 2쪽 이력서입니다. 상세 설계와 검증 과정은 위 사례에서 확인할 수 있습니다.</p>
         </div>
         <div class="contact-grid">
           <article>

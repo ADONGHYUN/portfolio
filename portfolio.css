@@ -241,6 +241,22 @@ summary { cursor: pointer; }
 .case-limit strong { display: block; margin-bottom: 5px; color: var(--ink); font-weight: 550; }
 .case-evidence { margin-top: 18px; }
 .case-evidence > p { margin: 12px 0; color: var(--muted); font-size: 14px; overflow-wrap: anywhere; }
+.case-screen-evidence { margin: 28px 0 28px 42px; padding-top: 24px; border-top: 1px solid var(--rule-light); }
+.case-screen-evidence > h4 { font-size: 15px; font-weight: 550; }
+.case-screen-evidence > p { margin-top: 6px; color: var(--muted); font-size: 13px; }
+.case-screen-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); align-items: start; gap: 32px; margin-top: 18px; }
+.case-screen-grid > figure { min-width: 0; }
+.case-screen-link { display: block; width: 100%; }
+.case-screen-link--order { max-width: 403px; }
+.case-screen-link--refund { max-width: 280px; }
+.case-screen-link img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); }
+.case-screen-link > span { display: inline-block; margin-top: 8px; color: var(--rose-dark); font-size: 12px; }
+.case-screen-link:hover > span { text-decoration: underline; text-underline-offset: 4px; }
+.case-screen-grid figcaption { margin-top: 12px; font-size: 13px; overflow-wrap: anywhere; }
+.case-screen-grid figcaption strong, .case-screen-grid figcaption span, .case-screen-grid figcaption small { display: block; }
+.case-screen-grid figcaption strong { font-weight: 550; }
+.case-screen-grid figcaption span { margin-top: 5px; color: var(--muted); }
+.case-screen-grid figcaption small { margin-top: 8px; color: var(--muted); font-size: 11px; }
 .implementation-code { padding: 20px; background: var(--paper-strong); font: 12px/1.8 Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: auto; }
 .implementation-code code { font: inherit; }
 .recent-improvements { padding-top: 40px; border-top: 1px solid var(--rule); scroll-margin-top: 32px; }
@@ -390,6 +406,7 @@ summary { cursor: pointer; }
 .stack-grid article, .contact-grid article { min-width: 0; padding: 18px 0; border-top: 1px solid var(--rule-light); }
 .stack-grid h3, .contact-grid span { display: block; margin-bottom: 6px; color: var(--muted); font-size: 13px; font-weight: 500; }
 .stack-grid p, .contact-grid a { font-size: 14px; overflow-wrap: anywhere; }
+.stack-grid .stack-context { margin-top: 8px; color: var(--muted); font-size: 12px; }
 .stack-grid .text-link { display: inline-block; margin-top: 8px; font-size: 12px; }
 .contact-grid a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .contact-dev-link { display: inline-block; margin-top: 20px; font-size: 13px; }
@@ -438,6 +455,9 @@ summary { cursor: pointer; }
   .case-study-heading { grid-template-columns: 24px minmax(0, 1fr); gap: 8px; }
   .case-study-heading h3, .company-case h3 { font-size: 19px; }
   .case-brief, .case-details { margin-left: 0; }
+  .case-screen-evidence { margin-left: 0; }
+  .case-screen-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .case-screen-link--refund { max-width: 360px; }
   .case-summary section, .case-checks dl > div { grid-template-columns: minmax(0, 1fr); gap: 8px; }
   .recent-grid { gap: 24px; }
   .company-case-summary { gap: 16px; }
@@ -464,7 +484,7 @@ summary { cursor: pointer; }
   .project-overview { grid-template-columns: minmax(0, 1fr); }
   .service-preview { max-width: 480px; }
   .case-study { break-inside: avoid; }
-  .case-details, .case-brief { margin-left: 0; }
+  .case-details, .case-brief, .case-screen-evidence { margin-left: 0; }
   a { color: inherit; }
 }
 @media (prefers-reduced-motion: reduce) {

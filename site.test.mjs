@@ -43,14 +43,16 @@ const requiredHtml = [
   "주문·결제·재고·배송의 핵심 관계",
   "payment_attempt",
   "notification_outbox",
-  "사내 메일 시스템 개발·운영",
+  "공공기관 메일 시스템 개발·운영",
   "3인 팀",
   "메일 배포를 인수한 뒤",
   "타 시스템 연계 API 개발 및 유지보수",
   "전체 10개 과업 중",
   "5개 과업을 개별 담당해 완료하고, 1개 과업을 공동 완료",
   "1년 미만 대상자에게 연가를 1일씩 부여하는 스케줄러",
-  "OZ Report 기반 근무성적평정 PDF 다운로드",
+  "OZ Report 기반 근무성적평정 PDF 생성",
+  "급여명세서 엑셀 업로드 시 양식의 잘못된 부분을 상세 오류 메시지로 안내",
+  "개발부터 운영 서버 배포·장애 대응까지 책임집니다.",
   "실패 조건을 정하고, 데이터가 어떻게 남는지 확인",
   "검증 환경과 범위",
   "실제 고객 장애 대응이 아니라",
@@ -114,6 +116,8 @@ const forbiddenPublicCopy = [
   "공개 가오픈",
   "실제 고객 유입 전",
   "총 1년 7개월",
+  "근무성적평정 PDF 다운로드",
+  "근무성적평정 문서 다운로드",
 ];
 
 for (const phrase of forbiddenPublicCopy) {
@@ -136,6 +140,21 @@ for (const [, id, content] of cases) {
   assert(!checks.includes("evidence-pending"), `${id} must not mix unverified expectations with confirmed results`);
 }
 const reservationSql = html.match(/<pre class="implementation-code"><code>([\s\S]*?)<\/code><\/pre>/)?.[1] || "";
+const paymentCase = cases.find(([, id]) => id === "case-payment")?.[2] || "";
+const paymentScreens = paymentCase.match(/<section class="case-screen-evidence"[\s\S]*?<\/section>/)?.[0] || "";
+assert(paymentScreens, "admin screenshots must accompany the payment case");
+assert(paymentCase.indexOf('class="case-brief"') < paymentCase.indexOf('class="case-screen-evidence"'), "screenshots must support the problem/choice/verification summary");
+assert(paymentCase.indexOf('class="case-screen-evidence"') < paymentCase.indexOf('class="case-details"'), "screenshots must be visible without expanding the implementation details");
+for (const [file, width, height] of [["admin-order-state.jpg", 403, 166], ["admin-refund-allocation.jpg", 512, 952]]) {
+  assert(paymentScreens.includes(`href="./assets/${file}"`), `${file} must open at its original size`);
+  assert(paymentScreens.includes(`src="./assets/${file}" width="${width}" height="${height}" loading="lazy"`), `${file} must reserve its aspect ratio and load lazily`);
+}
+assert((paymentScreens.match(/<img\b/g) || []).length === 2, "exactly two admin screenshots are required");
+assert((paymentScreens.match(/alt="[^"]+"/g) || []).length === 2, "both admin screenshots need descriptive alternative text");
+for (const boundary of ["주문번호·수령인·연락처 영역은 캡처에서 제외", "실제 구현 컴포넌트 · 테스트 데이터", "실제 고객 환불 내역은 아닙니다", "2026.10.14 캡처"]) {
+  assert(paymentScreens.includes(boundary), `screenshot caption must retain its boundary: ${boundary}`);
+}
+assert(!html.includes("order-raw") && !html.includes("portfolio-capture-private"), "private original captures must not be referenced by the public page");
 for (const guard of ["UPDATE inventory_option_balance", "stock_quantity - reserved_quantity - sales_hold_quantity &gt;= #{quantity}", "po.deleted_at IS NULL", "po.option_status = 'SELLABLE'", "p.deleted_at IS NULL", "p.product_status = 'ACTIVE'"]) {
   assert(reservationSql.includes(guard), `visible reservation SQL must retain its guard: ${guard}`);
 }
@@ -155,7 +174,7 @@ for (const phrase of [
   'href="#mail-incident"',
   "행정우편 첨부파일 삭제 장애 해결",
   "전달받은 파일·설정 목록에 따라 수행",
-  "배포 목록의 파일 누락과 아래 첨부파일 삭제 오류는 별개의 문제",
+  "메일 배포와 이후 기능 개발·유지보수·운영 오류 대응이 제가 맡은 범위",
   "폐쇄망 상주 환경",
   "기존 시스템을 직접 분석·수정하고 운영 배포를 수행",
 ]) {
@@ -194,9 +213,14 @@ for (const [, references] of html.matchAll(/aria-labelledby="([^"]+)"/g)) {
 const hero = html.match(/<section id="top"[\s\S]*?<\/section>/)?.[0] || "";
 assert(hero.includes('href="#mail-incident"'), "the hero must link directly to the incident");
 assert(hero.includes('href="#problem-solving"'), "the hero must link to the technical cases");
+assert(hero.includes('href="./assets/lim-donghyun-backend-resume.pdf"'), "the resume must be accessible from the hero");
+assert(hero.includes("백엔드·고객/관리자 화면, 테스트와 AWS 배포까지 1인"), "the hero must state the one-person scope concretely");
+assert(hero.includes("공공기관 메일 시스템의 요구사항 분석·기능 개발부터 운영 서버 배포와 오류 대응까지 단독"), "the hero must connect operational responsibility to the mail system, not general infrastructure administration");
 assert(!hero.includes('class="case-index"'), "the four-case index belongs with the technical cases");
 const stack = html.match(/<section id="stack"[\s\S]*?<\/section>/)?.[0] || "";
 assert((stack.match(/<article>/g) || []).length === 6, "the technology stack must use six concise tool categories");
+assert((stack.match(/class="stack-context"/g) || []).length === 6, "every technology group must explain its usage context");
+assert(companyExperience.includes("화면 수정·기능 개선을 지원"), "previous-company development work must retain its support scope");
 for (const detail of ["JSON Schema", "격리 작업 공간", "상태 머신", "Heartbeat", "Lease", "불변 revision", "입력 스냅샷", "상품 기준 해시"]) {
   assert(!stack.includes(detail), `implementation detail belongs in a case, not the stack: ${detail}`);
 }
