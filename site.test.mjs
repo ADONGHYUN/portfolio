@@ -218,8 +218,8 @@ assert(hero.includes("백엔드·고객/관리자 화면, 테스트와 AWS 배�
 assert(hero.includes("공공기관 메일 시스템의 요구사항 분석·기능 개발부터 운영 서버 배포와 오류 대응까지 단독"), "the hero must connect operational responsibility to the mail system, not general infrastructure administration");
 assert(!hero.includes('class="case-index"'), "the four-case index belongs with the technical cases");
 const stack = html.match(/<section id="stack"[\s\S]*?<\/section>/)?.[0] || "";
-assert((stack.match(/<article>/g) || []).length === 6, "the technology stack must use six concise tool categories");
-assert((stack.match(/class="stack-context"/g) || []).length === 6, "every technology group must explain its usage context");
+assert((stack.match(/<article>/g) || []).length === 4, "the technology stack must use four focused tool categories");
+assert((stack.match(/class="stack-context"/g) || []).length === 4, "every technology group must explain its usage context");
 assert(companyExperience.includes("화면 수정·기능 개선을 지원"), "previous-company development work must retain its support scope");
 for (const detail of ["JSON Schema", "격리 작업 공간", "상태 머신", "Heartbeat", "Lease", "불변 revision", "입력 스냅샷", "상품 기준 해시"]) {
   assert(!stack.includes(detail), `implementation detail belongs in a case, not the stack: ${detail}`);
